@@ -27,5 +27,4 @@ typedef uint16_t q16_t;
 typedef int32_t q31_t;
 typedef uint32_t q32_t;
 
-
 #endif /* TINYENGINE_INCLUDE_TINYENGINE_FUNCTIONLIB_H_ */

@@ -20,11 +20,11 @@
 #include "tinyengine_lib.h"
 #include "tinyengine_function.h"
 
-q7_t* mat_mult_kernel_s8_s16_reordered_ch48_fpreq(const q7_t *input_a,
-		const q15_t *input_b, const uint16_t output_ch, const float *scales,
-		const int32_t out_offset, const int16_t activation_min,
-		const int16_t activation_max, const uint16_t num_col_a,
-		const int32_t *const output_bias, q7_t *out_0) {
+q7_t *mat_mult_kernel_s8_s16_reordered_ch48_fpreq(const q7_t *input_a, const q15_t *input_b, const uint16_t output_ch,
+												  const float *scales, const int32_t out_offset,
+												  const int16_t activation_min, const int16_t activation_max,
+												  const uint16_t num_col_a, const int32_t *const output_bias,
+												  q7_t *out_0) {
 	/* set up the second output pointers */
 	q7_t *out_1 = out_0 + output_ch;
 	const int32_t *bias = output_bias;
@@ -291,29 +291,29 @@ q7_t* mat_mult_kernel_s8_s16_reordered_ch48_fpreq(const q7_t *input_a,
 		ch_1_out_0 = __SMLAD(a12, b0, ch_1_out_0);
 		ch_1_out_1 = __SMLAD(a12, b1, ch_1_out_1);
 
-		ch_0_out_0 = (q31_t) ((float) ch_0_out_0 * scale_0);
+		ch_0_out_0 = (q31_t)((float)ch_0_out_0 * scale_0);
 		ch_0_out_0 += out_offset;
 		ch_0_out_0 = MAX(ch_0_out_0, activation_min);
 		ch_0_out_0 = MIN(ch_0_out_0, activation_max);
-		*out_0++ = (q7_t) ch_0_out_0;
+		*out_0++ = (q7_t)ch_0_out_0;
 
-		ch_0_out_1 = (q31_t) ((float) ch_0_out_1 * scale_0);
+		ch_0_out_1 = (q31_t)((float)ch_0_out_1 * scale_0);
 		ch_0_out_1 += out_offset;
 		ch_0_out_1 = MAX(ch_0_out_1, activation_min);
 		ch_0_out_1 = MIN(ch_0_out_1, activation_max);
-		*out_1++ = (q7_t) ch_0_out_1;
+		*out_1++ = (q7_t)ch_0_out_1;
 
-		ch_1_out_0 = (q31_t) ((float) ch_1_out_0 * scale_1);
+		ch_1_out_0 = (q31_t)((float)ch_1_out_0 * scale_1);
 		ch_1_out_0 += out_offset;
 		ch_1_out_0 = MAX(ch_1_out_0, activation_min);
 		ch_1_out_0 = MIN(ch_1_out_0, activation_max);
-		*out_0++ = (q7_t) ch_1_out_0;
+		*out_0++ = (q7_t)ch_1_out_0;
 
-		ch_1_out_1 = (q31_t) ((float) ch_1_out_1 * scale_1);
+		ch_1_out_1 = (q31_t)((float)ch_1_out_1 * scale_1);
 		ch_1_out_1 += out_offset;
 		ch_1_out_1 = MAX(ch_1_out_1, activation_min);
 		ch_1_out_1 = MIN(ch_1_out_1, activation_max);
-		*out_1++ = (q7_t) ch_1_out_1;
+		*out_1++ = (q7_t)ch_1_out_1;
 		scales += 2;
 
 		/* skip row */
@@ -327,11 +327,11 @@ q7_t* mat_mult_kernel_s8_s16_reordered_ch48_fpreq(const q7_t *input_a,
 	return out_0;
 }
 
-q7_t* mat_mult_kernel_s8_s16_reordered_ch16_fpreq(const q7_t *input_a,
-		const q15_t *input_b, const uint16_t output_ch, const float *scales,
-		const int32_t out_offset, const int16_t activation_min,
-		const int16_t activation_max, const uint16_t num_col_a,
-		const int32_t *const output_bias, q7_t *out_0) {
+q7_t *mat_mult_kernel_s8_s16_reordered_ch16_fpreq(const q7_t *input_a, const q15_t *input_b, const uint16_t output_ch,
+												  const float *scales, const int32_t out_offset,
+												  const int16_t activation_min, const int16_t activation_max,
+												  const uint16_t num_col_a, const int32_t *const output_bias,
+												  q7_t *out_0) {
 	/* set up the second output pointers */
 	q7_t *out_1 = out_0 + output_ch;
 	const int32_t *bias = output_bias;
@@ -438,29 +438,29 @@ q7_t* mat_mult_kernel_s8_s16_reordered_ch16_fpreq(const q7_t *input_a,
 		ch_1_out_0 = __SMLAD(a12, b0, ch_1_out_0);
 		ch_1_out_1 = __SMLAD(a12, b1, ch_1_out_1);
 
-		ch_0_out_0 = (q31_t) ((float) ch_0_out_0 * scale_0);
+		ch_0_out_0 = (q31_t)((float)ch_0_out_0 * scale_0);
 		ch_0_out_0 += out_offset;
 		ch_0_out_0 = MAX(ch_0_out_0, activation_min);
 		ch_0_out_0 = MIN(ch_0_out_0, activation_max);
-		*out_0++ = (q7_t) ch_0_out_0;
+		*out_0++ = (q7_t)ch_0_out_0;
 
-		ch_0_out_1 = (q31_t) ((float) ch_0_out_1 * scale_0);
+		ch_0_out_1 = (q31_t)((float)ch_0_out_1 * scale_0);
 		ch_0_out_1 += out_offset;
 		ch_0_out_1 = MAX(ch_0_out_1, activation_min);
 		ch_0_out_1 = MIN(ch_0_out_1, activation_max);
-		*out_1++ = (q7_t) ch_0_out_1;
+		*out_1++ = (q7_t)ch_0_out_1;
 
-		ch_1_out_0 = (q31_t) ((float) ch_1_out_0 * scale_1);
+		ch_1_out_0 = (q31_t)((float)ch_1_out_0 * scale_1);
 		ch_1_out_0 += out_offset;
 		ch_1_out_0 = MAX(ch_1_out_0, activation_min);
 		ch_1_out_0 = MIN(ch_1_out_0, activation_max);
-		*out_0++ = (q7_t) ch_1_out_0;
+		*out_0++ = (q7_t)ch_1_out_0;
 
-		ch_1_out_1 = (q31_t) ((float) ch_1_out_1 * scale_1);
+		ch_1_out_1 = (q31_t)((float)ch_1_out_1 * scale_1);
 		ch_1_out_1 += out_offset;
 		ch_1_out_1 = MAX(ch_1_out_1, activation_min);
 		ch_1_out_1 = MIN(ch_1_out_1, activation_max);
-		*out_1++ = (q7_t) ch_1_out_1;
+		*out_1++ = (q7_t)ch_1_out_1;
 		scales += 2;
 
 		/* skip row */
@@ -474,11 +474,11 @@ q7_t* mat_mult_kernel_s8_s16_reordered_ch16_fpreq(const q7_t *input_a,
 	return out_0;
 }
 
-q7_t* mat_mult_kernel_s8_s16_reordered_ch8_fpreq(const q7_t *input_a,
-		const q15_t *input_b, const uint16_t output_ch, const float *scales,
-		const int32_t out_offset, const int16_t activation_min,
-		const int16_t activation_max, const uint16_t num_col_a,
-		const int32_t *const output_bias, q7_t *out_0) {
+q7_t *mat_mult_kernel_s8_s16_reordered_ch8_fpreq(const q7_t *input_a, const q15_t *input_b, const uint16_t output_ch,
+												 const float *scales, const int32_t out_offset,
+												 const int16_t activation_min, const int16_t activation_max,
+												 const uint16_t num_col_a, const int32_t *const output_bias,
+												 q7_t *out_0) {
 	/* set up the second output pointers */
 	q7_t *out_1 = out_0 + output_ch;
 	const int32_t *bias = output_bias;
@@ -546,29 +546,29 @@ q7_t* mat_mult_kernel_s8_s16_reordered_ch8_fpreq(const q7_t *input_a,
 		b0 = arm_nn_read_q15x2_ia(&ip_b0);
 		ch_1_out_1 = __SMLAD(a12, b1, ch_1_out_1);
 
-		ch_0_out_0 = (q31_t) ((float) ch_0_out_0 * scale_0);
+		ch_0_out_0 = (q31_t)((float)ch_0_out_0 * scale_0);
 		ch_0_out_0 += out_offset;
 		ch_0_out_0 = MAX(ch_0_out_0, activation_min);
 		ch_0_out_0 = MIN(ch_0_out_0, activation_max);
-		*out_0++ = (q7_t) ch_0_out_0;
+		*out_0++ = (q7_t)ch_0_out_0;
 
-		ch_0_out_1 = (q31_t) ((float) ch_0_out_1 * scale_0);
+		ch_0_out_1 = (q31_t)((float)ch_0_out_1 * scale_0);
 		ch_0_out_1 += out_offset;
 		ch_0_out_1 = MAX(ch_0_out_1, activation_min);
 		ch_0_out_1 = MIN(ch_0_out_1, activation_max);
-		*out_1++ = (q7_t) ch_0_out_1;
+		*out_1++ = (q7_t)ch_0_out_1;
 
-		ch_1_out_0 = (q31_t) ((float) ch_1_out_0 * scale_1);
+		ch_1_out_0 = (q31_t)((float)ch_1_out_0 * scale_1);
 		ch_1_out_0 += out_offset;
 		ch_1_out_0 = MAX(ch_1_out_0, activation_min);
 		ch_1_out_0 = MIN(ch_1_out_0, activation_max);
-		*out_0++ = (q7_t) ch_1_out_0;
+		*out_0++ = (q7_t)ch_1_out_0;
 
-		ch_1_out_1 = (q31_t) ((float) ch_1_out_1 * scale_1);
+		ch_1_out_1 = (q31_t)((float)ch_1_out_1 * scale_1);
 		ch_1_out_1 += out_offset;
 		ch_1_out_1 = MAX(ch_1_out_1, activation_min);
 		ch_1_out_1 = MIN(ch_1_out_1, activation_max);
-		*out_1++ = (q7_t) ch_1_out_1;
+		*out_1++ = (q7_t)ch_1_out_1;
 		scales += 2;
 
 		/* skip row */
@@ -582,11 +582,11 @@ q7_t* mat_mult_kernel_s8_s16_reordered_ch8_fpreq(const q7_t *input_a,
 	return out_0;
 }
 
-q7_t* mat_mult_kernel_s8_s16_reordered_ch24_fpreq(const q7_t *input_a,
-		const q15_t *input_b, const uint16_t output_ch, const float *scales,
-		const int32_t out_offset, const int16_t activation_min,
-		const int16_t activation_max, const uint16_t num_col_a,
-		const int32_t *const output_bias, q7_t *out_0) {
+q7_t *mat_mult_kernel_s8_s16_reordered_ch24_fpreq(const q7_t *input_a, const q15_t *input_b, const uint16_t output_ch,
+												  const float *scales, const int32_t out_offset,
+												  const int16_t activation_min, const int16_t activation_max,
+												  const uint16_t num_col_a, const int32_t *const output_bias,
+												  q7_t *out_0) {
 	/* set up the second output pointers */
 	q7_t *out_1 = out_0 + output_ch;
 	const int32_t *bias = output_bias;
@@ -734,29 +734,29 @@ q7_t* mat_mult_kernel_s8_s16_reordered_ch24_fpreq(const q7_t *input_a,
 		b0 = arm_nn_read_q15x2_ia(&ip_b0);
 		ch_1_out_1 = __SMLAD(a12, b1, ch_1_out_1);
 
-		ch_0_out_0 = (q31_t) ((float) ch_0_out_0 * scale_0);
+		ch_0_out_0 = (q31_t)((float)ch_0_out_0 * scale_0);
 		ch_0_out_0 += out_offset;
 		ch_0_out_0 = MAX(ch_0_out_0, activation_min);
 		ch_0_out_0 = MIN(ch_0_out_0, activation_max);
-		*out_0++ = (q7_t) ch_0_out_0;
+		*out_0++ = (q7_t)ch_0_out_0;
 
-		ch_0_out_1 = (q31_t) ((float) ch_0_out_1 * scale_0);
+		ch_0_out_1 = (q31_t)((float)ch_0_out_1 * scale_0);
 		ch_0_out_1 += out_offset;
 		ch_0_out_1 = MAX(ch_0_out_1, activation_min);
 		ch_0_out_1 = MIN(ch_0_out_1, activation_max);
-		*out_1++ = (q7_t) ch_0_out_1;
+		*out_1++ = (q7_t)ch_0_out_1;
 
-		ch_1_out_0 = (q31_t) ((float) ch_1_out_0 * scale_1);
+		ch_1_out_0 = (q31_t)((float)ch_1_out_0 * scale_1);
 		ch_1_out_0 += out_offset;
 		ch_1_out_0 = MAX(ch_1_out_0, activation_min);
 		ch_1_out_0 = MIN(ch_1_out_0, activation_max);
-		*out_0++ = (q7_t) ch_1_out_0;
+		*out_0++ = (q7_t)ch_1_out_0;
 
-		ch_1_out_1 = (q31_t) ((float) ch_1_out_1 * scale_1);
+		ch_1_out_1 = (q31_t)((float)ch_1_out_1 * scale_1);
 		ch_1_out_1 += out_offset;
 		ch_1_out_1 = MAX(ch_1_out_1, activation_min);
 		ch_1_out_1 = MIN(ch_1_out_1, activation_max);
-		*out_1++ = (q7_t) ch_1_out_1;
+		*out_1++ = (q7_t)ch_1_out_1;
 		scales += 2;
 
 		/* skip row */
@@ -770,11 +770,10 @@ q7_t* mat_mult_kernel_s8_s16_reordered_ch24_fpreq(const q7_t *input_a,
 	return out_0;
 }
 
-q7_t* mat_mult_kernel_s8_s16_reordered_fpreq(const q7_t *input_a,
-		const q15_t *input_b, const uint16_t output_ch, const float *scales,
-		const int32_t out_offset, const int16_t activation_min,
-		const int16_t activation_max, const uint16_t num_col_a,
-		const int32_t *const output_bias, q7_t *out_0) {
+q7_t *mat_mult_kernel_s8_s16_reordered_fpreq(const q7_t *input_a, const q15_t *input_b, const uint16_t output_ch,
+											 const float *scales, const int32_t out_offset,
+											 const int16_t activation_min, const int16_t activation_max,
+											 const uint16_t num_col_a, const int32_t *const output_bias, q7_t *out_0) {
 	/* set up the second output pointers */
 	q7_t *out_1 = out_0 + output_ch;
 	const int32_t *bias = output_bias;
@@ -824,29 +823,29 @@ q7_t* mat_mult_kernel_s8_s16_reordered_fpreq(const q7_t *input_a,
 			col_count--;
 		} /* while over col_count */
 
-		ch_0_out_0 = (q31_t) ((float) ch_0_out_0 * scale_0);
+		ch_0_out_0 = (q31_t)((float)ch_0_out_0 * scale_0);
 		ch_0_out_0 += out_offset;
 		ch_0_out_0 = MAX(ch_0_out_0, activation_min);
 		ch_0_out_0 = MIN(ch_0_out_0, activation_max);
-		*out_0++ = (q7_t) ch_0_out_0;
+		*out_0++ = (q7_t)ch_0_out_0;
 
-		ch_0_out_1 = (q31_t) ((float) ch_0_out_1 * scale_0);
+		ch_0_out_1 = (q31_t)((float)ch_0_out_1 * scale_0);
 		ch_0_out_1 += out_offset;
 		ch_0_out_1 = MAX(ch_0_out_1, activation_min);
 		ch_0_out_1 = MIN(ch_0_out_1, activation_max);
-		*out_1++ = (q7_t) ch_0_out_1;
+		*out_1++ = (q7_t)ch_0_out_1;
 
-		ch_1_out_0 = (q31_t) ((float) ch_1_out_0 * scale_1);
+		ch_1_out_0 = (q31_t)((float)ch_1_out_0 * scale_1);
 		ch_1_out_0 += out_offset;
 		ch_1_out_0 = MAX(ch_1_out_0, activation_min);
 		ch_1_out_0 = MIN(ch_1_out_0, activation_max);
-		*out_0++ = (q7_t) ch_1_out_0;
+		*out_0++ = (q7_t)ch_1_out_0;
 
-		ch_1_out_1 = (q31_t) ((float) ch_1_out_1 * scale_1);
+		ch_1_out_1 = (q31_t)((float)ch_1_out_1 * scale_1);
 		ch_1_out_1 += out_offset;
 		ch_1_out_1 = MAX(ch_1_out_1, activation_min);
 		ch_1_out_1 = MIN(ch_1_out_1, activation_max);
-		*out_1++ = (q7_t) ch_1_out_1;
+		*out_1++ = (q7_t)ch_1_out_1;
 		scales += 2;
 
 		/* skip row */
@@ -883,17 +882,17 @@ q7_t* mat_mult_kernel_s8_s16_reordered_fpreq(const q7_t *input_a,
 			col_count--;
 		} /* while over col_count */
 
-		ch_0_out_0 = (q31_t) ((float) ch_0_out_0 * *scales);
+		ch_0_out_0 = (q31_t)((float)ch_0_out_0 * *scales);
 		ch_0_out_0 += out_offset;
 		ch_0_out_0 = MAX(ch_0_out_0, activation_min);
 		ch_0_out_0 = MIN(ch_0_out_0, activation_max);
-		*out_0++ = (q7_t) ch_0_out_0;
+		*out_0++ = (q7_t)ch_0_out_0;
 
-		ch_0_out_1 = (q31_t) ((float) ch_0_out_1 * *scales);
+		ch_0_out_1 = (q31_t)((float)ch_0_out_1 * *scales);
 		ch_0_out_1 += out_offset;
 		ch_0_out_1 = MAX(ch_0_out_1, activation_min);
 		ch_0_out_1 = MIN(ch_0_out_1, activation_max);
-		*out_1++ = (q7_t) ch_0_out_1;
+		*out_1++ = (q7_t)ch_0_out_1;
 	}
 
 	out_0 += output_ch;
@@ -902,11 +901,11 @@ q7_t* mat_mult_kernel_s8_s16_reordered_fpreq(const q7_t *input_a,
 	return out_0;
 }
 
-q7_t* mat_mult_kernel_s8_s16_reordered_fpreq_bitmask(const q7_t *input_a,
-		const q15_t *input_b, const uint16_t output_ch, const float *scales,
-		const int32_t out_offset, const int16_t activation_min,
-		const int16_t activation_max, const uint16_t num_col_a,
-		const int32_t *const output_bias, q7_t *out_0, q7_t *mask) {
+q7_t *mat_mult_kernel_s8_s16_reordered_fpreq_bitmask(const q7_t *input_a, const q15_t *input_b,
+													 const uint16_t output_ch, const float *scales,
+													 const int32_t out_offset, const int16_t activation_min,
+													 const int16_t activation_max, const uint16_t num_col_a,
+													 const int32_t *const output_bias, q7_t *out_0, q7_t *mask) {
 	/* set up the second output pointers */
 	q7_t *out_1 = out_0 + output_ch;
 	q7_t *mask1 = mask + output_ch / 8;
@@ -958,14 +957,14 @@ q7_t* mat_mult_kernel_s8_s16_reordered_fpreq_bitmask(const q7_t *input_a,
 			col_count--;
 		} /* while over col_count */
 
-		ch_0_out_0 = (q31_t) ((float) ch_0_out_0 * scale_0);
+		ch_0_out_0 = (q31_t)((float)ch_0_out_0 * scale_0);
 		ch_0_out_0 += out_offset;
 		q7_t mask_value = 1;
-		if (ch_0_out_0 < activation_min){
+		if (ch_0_out_0 < activation_min) {
 			ch_0_out_0 = activation_min;
 			mask_value = 0;
 		}
-		if (ch_0_out_0 > activation_max){
+		if (ch_0_out_0 > activation_max) {
 			ch_0_out_0 = activation_max;
 			mask_value = 0;
 		}
@@ -973,17 +972,16 @@ q7_t* mat_mult_kernel_s8_s16_reordered_fpreq_bitmask(const q7_t *input_a,
 			BIT_SET(*mask, bit_starting_idx);
 		else
 			BIT_CLEAR(*mask, bit_starting_idx);
-		*out_0++ = (q7_t) ch_0_out_0;
+		*out_0++ = (q7_t)ch_0_out_0;
 
-
-		ch_0_out_1 = (q31_t) ((float) ch_0_out_1 * scale_0);
+		ch_0_out_1 = (q31_t)((float)ch_0_out_1 * scale_0);
 		ch_0_out_1 += out_offset;
 		mask_value = 1;
-		if (ch_0_out_1 < activation_min){
+		if (ch_0_out_1 < activation_min) {
 			ch_0_out_1 = activation_min;
 			mask_value = 0;
 		}
-		if (ch_0_out_1 > activation_max){
+		if (ch_0_out_1 > activation_max) {
 			ch_0_out_1 = activation_max;
 			mask_value = 0;
 		}
@@ -991,45 +989,45 @@ q7_t* mat_mult_kernel_s8_s16_reordered_fpreq_bitmask(const q7_t *input_a,
 			BIT_SET(*mask1, bit_starting_idx);
 		else
 			BIT_CLEAR(*mask1, bit_starting_idx);
-		*out_1++ = (q7_t) ch_0_out_1;
+		*out_1++ = (q7_t)ch_0_out_1;
 
-		ch_1_out_0 = (q31_t) ((float) ch_1_out_0 * scale_1);
+		ch_1_out_0 = (q31_t)((float)ch_1_out_0 * scale_1);
 		ch_1_out_0 += out_offset;
 		mask_value = 1;
-		if (ch_1_out_0 < activation_min){
+		if (ch_1_out_0 < activation_min) {
 			ch_1_out_0 = activation_min;
 			mask_value = 0;
 		}
-		if (ch_1_out_0 > activation_max){
+		if (ch_1_out_0 > activation_max) {
 			ch_1_out_0 = activation_max;
 			mask_value = 0;
 		}
 		if (mask_value == 1)
-			BIT_SET(*mask, bit_starting_idx+1);
+			BIT_SET(*mask, bit_starting_idx + 1);
 		else
-			BIT_CLEAR(*mask, bit_starting_idx+1);
-		*out_0++ = (q7_t) ch_1_out_0;
+			BIT_CLEAR(*mask, bit_starting_idx + 1);
+		*out_0++ = (q7_t)ch_1_out_0;
 
-		ch_1_out_1 = (q31_t) ((float) ch_1_out_1 * scale_1);
+		ch_1_out_1 = (q31_t)((float)ch_1_out_1 * scale_1);
 		ch_1_out_1 += out_offset;
 		mask_value = 1;
-		if (ch_1_out_1 < activation_min){
+		if (ch_1_out_1 < activation_min) {
 			ch_1_out_1 = activation_min;
 			mask_value = 0;
 		}
-		if (ch_1_out_1 > activation_max){
+		if (ch_1_out_1 > activation_max) {
 			ch_1_out_1 = activation_max;
 			mask_value = 0;
 		}
 		if (mask_value == 1)
-			BIT_SET(*mask1, bit_starting_idx+1);
+			BIT_SET(*mask1, bit_starting_idx + 1);
 		else
-			BIT_CLEAR(*mask1, bit_starting_idx+1);
-		*out_1++ = (q7_t) ch_1_out_1;
+			BIT_CLEAR(*mask1, bit_starting_idx + 1);
+		*out_1++ = (q7_t)ch_1_out_1;
 		scales += 2;
 
 		bit_starting_idx += 2;
-		if(bit_starting_idx == 8){
+		if (bit_starting_idx == 8) {
 			bit_starting_idx = 0;
 			mask++;
 			mask1++;
@@ -1046,11 +1044,11 @@ q7_t* mat_mult_kernel_s8_s16_reordered_fpreq_bitmask(const q7_t *input_a,
 	return out_0;
 }
 
-q7_t* mat_mult_kernel_s8_s16_reordered_fpreq_mask(const q7_t *input_a,
-		const q15_t *input_b, const uint16_t output_ch, const float *scales,
-		const int32_t out_offset, const int16_t activation_min,
-		const int16_t activation_max, const uint16_t num_col_a,
-		const int32_t *const output_bias, q7_t *out_0, q7_t *mask) {
+q7_t *mat_mult_kernel_s8_s16_reordered_fpreq_mask(const q7_t *input_a, const q15_t *input_b, const uint16_t output_ch,
+												  const float *scales, const int32_t out_offset,
+												  const int16_t activation_min, const int16_t activation_max,
+												  const uint16_t num_col_a, const int32_t *const output_bias,
+												  q7_t *out_0, q7_t *mask) {
 	/* set up the second output pointers */
 	q7_t *out_1 = out_0 + output_ch;
 	q7_t *mask1 = mask + output_ch;
@@ -1101,62 +1099,61 @@ q7_t* mat_mult_kernel_s8_s16_reordered_fpreq_mask(const q7_t *input_a,
 			col_count--;
 		} /* while over col_count */
 
-		ch_0_out_0 = (q31_t) ((float) ch_0_out_0 * scale_0);
+		ch_0_out_0 = (q31_t)((float)ch_0_out_0 * scale_0);
 		ch_0_out_0 += out_offset;
 		q7_t mask_value = 1;
-		if (ch_0_out_0 < activation_min){
+		if (ch_0_out_0 < activation_min) {
 			ch_0_out_0 = activation_min;
 			mask_value = 0;
 		}
-		if (ch_0_out_0 > activation_max){
+		if (ch_0_out_0 > activation_max) {
 			ch_0_out_0 = activation_max;
 			mask_value = 0;
 		}
-		*mask++ = (q7_t) mask_value;
-		*out_0++ = (q7_t) ch_0_out_0;
+		*mask++ = (q7_t)mask_value;
+		*out_0++ = (q7_t)ch_0_out_0;
 
-
-		ch_0_out_1 = (q31_t) ((float) ch_0_out_1 * scale_0);
+		ch_0_out_1 = (q31_t)((float)ch_0_out_1 * scale_0);
 		ch_0_out_1 += out_offset;
 		mask_value = 1;
-		if (ch_0_out_1 < activation_min){
+		if (ch_0_out_1 < activation_min) {
 			ch_0_out_1 = activation_min;
 			mask_value = 0;
 		}
-		if (ch_0_out_1 > activation_max){
+		if (ch_0_out_1 > activation_max) {
 			ch_0_out_1 = activation_max;
 			mask_value = 0;
 		}
-		*mask1++ = (q7_t) mask_value;
-		*out_1++ = (q7_t) ch_0_out_1;
+		*mask1++ = (q7_t)mask_value;
+		*out_1++ = (q7_t)ch_0_out_1;
 
-		ch_1_out_0 = (q31_t) ((float) ch_1_out_0 * scale_1);
+		ch_1_out_0 = (q31_t)((float)ch_1_out_0 * scale_1);
 		ch_1_out_0 += out_offset;
 		mask_value = 1;
-		if (ch_1_out_0 < activation_min){
+		if (ch_1_out_0 < activation_min) {
 			ch_1_out_0 = activation_min;
 			mask_value = 0;
 		}
-		if (ch_1_out_0 > activation_max){
+		if (ch_1_out_0 > activation_max) {
 			ch_1_out_0 = activation_max;
 			mask_value = 0;
 		}
-		*mask++ = (q7_t) mask_value;
-		*out_0++ = (q7_t) ch_1_out_0;
+		*mask++ = (q7_t)mask_value;
+		*out_0++ = (q7_t)ch_1_out_0;
 
-		ch_1_out_1 = (q31_t) ((float) ch_1_out_1 * scale_1);
+		ch_1_out_1 = (q31_t)((float)ch_1_out_1 * scale_1);
 		ch_1_out_1 += out_offset;
 		mask_value = 1;
-		if (ch_1_out_1 < activation_min){
+		if (ch_1_out_1 < activation_min) {
 			ch_1_out_1 = activation_min;
 			mask_value = 0;
 		}
-		if (ch_1_out_1 > activation_max){
+		if (ch_1_out_1 > activation_max) {
 			ch_1_out_1 = activation_max;
 			mask_value = 0;
 		}
-		*mask1++ = (q7_t) mask_value;
-		*out_1++ = (q7_t) ch_1_out_1;
+		*mask1++ = (q7_t)mask_value;
+		*out_1++ = (q7_t)ch_1_out_1;
 		scales += 2;
 
 		/* skip row */
@@ -1171,12 +1168,12 @@ q7_t* mat_mult_kernel_s8_s16_reordered_fpreq_mask(const q7_t *input_a,
 }
 
 // Note: this is intend for 1x1, others need to be further tested
-q7_t* mat_mult_kernel_s8_s16_reordered_fpreq_mask_partialCH(const q7_t *kernel_sram,
-		const q7_t *kernel_flash, const uint16_t first_k_channel,
-		const q15_t *input_b, const uint16_t output_ch, const float *scales,
-		const int32_t out_offset, const int16_t activation_min,
-		const int16_t activation_max, const uint16_t num_col_a,
-		const int32_t *const output_bias, q7_t *out_0, q7_t *mask) {
+q7_t *mat_mult_kernel_s8_s16_reordered_fpreq_mask_partialCH(const q7_t *kernel_sram, const q7_t *kernel_flash,
+															const uint16_t first_k_channel, const q15_t *input_b,
+															const uint16_t output_ch, const float *scales,
+															const int32_t out_offset, const int16_t activation_min,
+															const int16_t activation_max, const uint16_t num_col_a,
+															const int32_t *const output_bias, q7_t *out_0, q7_t *mask) {
 	/* set up the second output pointers */
 	q7_t *out_1 = out_0 + output_ch;
 	q7_t *mask1 = mask + output_ch;
@@ -1259,62 +1256,61 @@ q7_t* mat_mult_kernel_s8_s16_reordered_fpreq_mask_partialCH(const q7_t *kernel_s
 			col_count--;
 		} /* while over col_count */
 
-		ch_0_out_0 = (q31_t) ((float) ch_0_out_0 * scale_0);
+		ch_0_out_0 = (q31_t)((float)ch_0_out_0 * scale_0);
 		ch_0_out_0 += out_offset;
 		q7_t mask_value = 1;
-		if (ch_0_out_0 < activation_min){
+		if (ch_0_out_0 < activation_min) {
 			ch_0_out_0 = activation_min;
 			mask_value = 0;
 		}
-		if (ch_0_out_0 > activation_max){
+		if (ch_0_out_0 > activation_max) {
 			ch_0_out_0 = activation_max;
 			mask_value = 0;
 		}
-		*mask++ = (q7_t) mask_value;
-		*out_0++ = (q7_t) ch_0_out_0;
+		*mask++ = (q7_t)mask_value;
+		*out_0++ = (q7_t)ch_0_out_0;
 
-
-		ch_0_out_1 = (q31_t) ((float) ch_0_out_1 * scale_0);
+		ch_0_out_1 = (q31_t)((float)ch_0_out_1 * scale_0);
 		ch_0_out_1 += out_offset;
 		mask_value = 1;
-		if (ch_0_out_1 < activation_min){
+		if (ch_0_out_1 < activation_min) {
 			ch_0_out_1 = activation_min;
 			mask_value = 0;
 		}
-		if (ch_0_out_1 > activation_max){
+		if (ch_0_out_1 > activation_max) {
 			ch_0_out_1 = activation_max;
 			mask_value = 0;
 		}
-		*mask1++ = (q7_t) mask_value;
-		*out_1++ = (q7_t) ch_0_out_1;
+		*mask1++ = (q7_t)mask_value;
+		*out_1++ = (q7_t)ch_0_out_1;
 
-		ch_1_out_0 = (q31_t) ((float) ch_1_out_0 * scale_1);
+		ch_1_out_0 = (q31_t)((float)ch_1_out_0 * scale_1);
 		ch_1_out_0 += out_offset;
 		mask_value = 1;
-		if (ch_1_out_0 < activation_min){
+		if (ch_1_out_0 < activation_min) {
 			ch_1_out_0 = activation_min;
 			mask_value = 0;
 		}
-		if (ch_1_out_0 > activation_max){
+		if (ch_1_out_0 > activation_max) {
 			ch_1_out_0 = activation_max;
 			mask_value = 0;
 		}
-		*mask++ = (q7_t) mask_value;
-		*out_0++ = (q7_t) ch_1_out_0;
+		*mask++ = (q7_t)mask_value;
+		*out_0++ = (q7_t)ch_1_out_0;
 
-		ch_1_out_1 = (q31_t) ((float) ch_1_out_1 * scale_1);
+		ch_1_out_1 = (q31_t)((float)ch_1_out_1 * scale_1);
 		ch_1_out_1 += out_offset;
 		mask_value = 1;
-		if (ch_1_out_1 < activation_min){
+		if (ch_1_out_1 < activation_min) {
 			ch_1_out_1 = activation_min;
 			mask_value = 0;
 		}
-		if (ch_1_out_1 > activation_max){
+		if (ch_1_out_1 > activation_max) {
 			ch_1_out_1 = activation_max;
 			mask_value = 0;
 		}
-		*mask1++ = (q7_t) mask_value;
-		*out_1++ = (q7_t) ch_1_out_1;
+		*mask1++ = (q7_t)mask_value;
+		*out_1++ = (q7_t)ch_1_out_1;
 		scales += 2;
 
 		/* skip row */
@@ -1330,12 +1326,10 @@ q7_t* mat_mult_kernel_s8_s16_reordered_fpreq_mask_partialCH(const q7_t *kernel_s
 }
 
 // Note: this is intend for 1x1, others need to be further tested
-q7_t* mat_mult_kernel_s8_s16_reordered_fpreq_bitmask_partialCH(const q7_t *kernel_sram,
-		const q7_t *kernel_flash, const uint16_t first_k_channel,
-		const q15_t *input_b, const uint16_t output_ch, const float *scales,
-		const int32_t out_offset, const int16_t activation_min,
-		const int16_t activation_max, const uint16_t num_col_a,
-		const int32_t *const output_bias, q7_t *out_0, q7_t *mask) {
+q7_t *mat_mult_kernel_s8_s16_reordered_fpreq_bitmask_partialCH(
+	const q7_t *kernel_sram, const q7_t *kernel_flash, const uint16_t first_k_channel, const q15_t *input_b,
+	const uint16_t output_ch, const float *scales, const int32_t out_offset, const int16_t activation_min,
+	const int16_t activation_max, const uint16_t num_col_a, const int32_t *const output_bias, q7_t *out_0, q7_t *mask) {
 	/* set up the second output pointers */
 	q7_t *out_1 = out_0 + output_ch;
 	q7_t *mask1 = mask + output_ch / 8;
@@ -1419,14 +1413,14 @@ q7_t* mat_mult_kernel_s8_s16_reordered_fpreq_bitmask_partialCH(const q7_t *kerne
 			col_count--;
 		} /* while over col_count */
 
-		ch_0_out_0 = (q31_t) ((float) ch_0_out_0 * scale_0);
+		ch_0_out_0 = (q31_t)((float)ch_0_out_0 * scale_0);
 		ch_0_out_0 += out_offset;
 		q7_t mask_value = 1;
-		if (ch_0_out_0 < activation_min){
+		if (ch_0_out_0 < activation_min) {
 			ch_0_out_0 = activation_min;
 			mask_value = 0;
 		}
-		if (ch_0_out_0 > activation_max){
+		if (ch_0_out_0 > activation_max) {
 			ch_0_out_0 = activation_max;
 			mask_value = 0;
 		}
@@ -1434,17 +1428,16 @@ q7_t* mat_mult_kernel_s8_s16_reordered_fpreq_bitmask_partialCH(const q7_t *kerne
 			BIT_SET(*mask, bit_starting_idx);
 		else
 			BIT_CLEAR(*mask, bit_starting_idx);
-		*out_0++ = (q7_t) ch_0_out_0;
+		*out_0++ = (q7_t)ch_0_out_0;
 
-
-		ch_0_out_1 = (q31_t) ((float) ch_0_out_1 * scale_0);
+		ch_0_out_1 = (q31_t)((float)ch_0_out_1 * scale_0);
 		ch_0_out_1 += out_offset;
 		mask_value = 1;
-		if (ch_0_out_1 < activation_min){
+		if (ch_0_out_1 < activation_min) {
 			ch_0_out_1 = activation_min;
 			mask_value = 0;
 		}
-		if (ch_0_out_1 > activation_max){
+		if (ch_0_out_1 > activation_max) {
 			ch_0_out_1 = activation_max;
 			mask_value = 0;
 		}
@@ -1452,46 +1445,45 @@ q7_t* mat_mult_kernel_s8_s16_reordered_fpreq_bitmask_partialCH(const q7_t *kerne
 			BIT_SET(*mask1, bit_starting_idx);
 		else
 			BIT_CLEAR(*mask1, bit_starting_idx);
-		*out_1++ = (q7_t) ch_0_out_1;
+		*out_1++ = (q7_t)ch_0_out_1;
 
-
-		ch_1_out_0 = (q31_t) ((float) ch_1_out_0 * scale_1);
+		ch_1_out_0 = (q31_t)((float)ch_1_out_0 * scale_1);
 		ch_1_out_0 += out_offset;
 		mask_value = 1;
-		if (ch_1_out_0 < activation_min){
+		if (ch_1_out_0 < activation_min) {
 			ch_1_out_0 = activation_min;
 			mask_value = 0;
 		}
-		if (ch_1_out_0 > activation_max){
+		if (ch_1_out_0 > activation_max) {
 			ch_1_out_0 = activation_max;
 			mask_value = 0;
 		}
 		if (mask_value == 1)
-			BIT_SET(*mask, bit_starting_idx+1);
+			BIT_SET(*mask, bit_starting_idx + 1);
 		else
-			BIT_CLEAR(*mask, bit_starting_idx+1);
-		*out_0++ = (q7_t) ch_1_out_0;
+			BIT_CLEAR(*mask, bit_starting_idx + 1);
+		*out_0++ = (q7_t)ch_1_out_0;
 
-		ch_1_out_1 = (q31_t) ((float) ch_1_out_1 * scale_1);
+		ch_1_out_1 = (q31_t)((float)ch_1_out_1 * scale_1);
 		ch_1_out_1 += out_offset;
 		mask_value = 1;
-		if (ch_1_out_1 < activation_min){
+		if (ch_1_out_1 < activation_min) {
 			ch_1_out_1 = activation_min;
 			mask_value = 0;
 		}
-		if (ch_1_out_1 > activation_max){
+		if (ch_1_out_1 > activation_max) {
 			ch_1_out_1 = activation_max;
 			mask_value = 0;
 		}
 		if (mask_value == 1)
-			BIT_SET(*mask1, bit_starting_idx+1);
+			BIT_SET(*mask1, bit_starting_idx + 1);
 		else
-			BIT_CLEAR(*mask1, bit_starting_idx+1);
-		*out_1++ = (q7_t) ch_1_out_1;
+			BIT_CLEAR(*mask1, bit_starting_idx + 1);
+		*out_1++ = (q7_t)ch_1_out_1;
 		scales += 2;
 
 		bit_starting_idx += 2;
-		if(bit_starting_idx == 8){
+		if (bit_starting_idx == 8) {
 			bit_starting_idx = 0;
 			mask++;
 			mask1++;
@@ -1509,14 +1501,11 @@ q7_t* mat_mult_kernel_s8_s16_reordered_fpreq_bitmask_partialCH(const q7_t *kerne
 	return out_0;
 }
 
-
 // Note: this is intend for 1x1, others need to be further tested
-q7_t* mat_mult_kernel_s8_s16_reordered_fpreq_mask_partialCH_Multiple2(const q7_t *kernel_sram,
-		const q7_t *kernel_flash, const uint16_t first_k_channel,
-		const q15_t *input_b, const uint16_t output_ch, const float *scales,
-		const int32_t out_offset, const int16_t activation_min,
-		const int16_t activation_max, const uint16_t num_col_a,
-		const int32_t *const output_bias, q7_t *out_0, q7_t *mask) {
+q7_t *mat_mult_kernel_s8_s16_reordered_fpreq_mask_partialCH_Multiple2(
+	const q7_t *kernel_sram, const q7_t *kernel_flash, const uint16_t first_k_channel, const q15_t *input_b,
+	const uint16_t output_ch, const float *scales, const int32_t out_offset, const int16_t activation_min,
+	const int16_t activation_max, const uint16_t num_col_a, const int32_t *const output_bias, q7_t *out_0, q7_t *mask) {
 	/* set up the second output pointers */
 	q7_t *out_1 = out_0 + output_ch;
 	q7_t *mask1 = mask + output_ch;
@@ -1589,63 +1578,61 @@ q7_t* mat_mult_kernel_s8_s16_reordered_fpreq_mask_partialCH_Multiple2(const q7_t
 			col_count--;
 		} /* while over col_count */
 
-
-		ch_0_out_0 = (q31_t) ((float) ch_0_out_0 * scale_0);
+		ch_0_out_0 = (q31_t)((float)ch_0_out_0 * scale_0);
 		ch_0_out_0 += out_offset;
 		q7_t mask_value = 1;
-		if (ch_0_out_0 < activation_min){
+		if (ch_0_out_0 < activation_min) {
 			ch_0_out_0 = activation_min;
 			mask_value = 0;
 		}
-		if (ch_0_out_0 > activation_max){
+		if (ch_0_out_0 > activation_max) {
 			ch_0_out_0 = activation_max;
 			mask_value = 0;
 		}
-		*mask++ = (q7_t) mask_value;
-		*out_0++ = (q7_t) ch_0_out_0;
+		*mask++ = (q7_t)mask_value;
+		*out_0++ = (q7_t)ch_0_out_0;
 
-
-		ch_0_out_1 = (q31_t) ((float) ch_0_out_1 * scale_0);
+		ch_0_out_1 = (q31_t)((float)ch_0_out_1 * scale_0);
 		ch_0_out_1 += out_offset;
 		mask_value = 1;
-		if (ch_0_out_1 < activation_min){
+		if (ch_0_out_1 < activation_min) {
 			ch_0_out_1 = activation_min;
 			mask_value = 0;
 		}
-		if (ch_0_out_1 > activation_max){
+		if (ch_0_out_1 > activation_max) {
 			ch_0_out_1 = activation_max;
 			mask_value = 0;
 		}
-		*mask1++ = (q7_t) mask_value;
-		*out_1++ = (q7_t) ch_0_out_1;
+		*mask1++ = (q7_t)mask_value;
+		*out_1++ = (q7_t)ch_0_out_1;
 
-		ch_1_out_0 = (q31_t) ((float) ch_1_out_0 * scale_1);
+		ch_1_out_0 = (q31_t)((float)ch_1_out_0 * scale_1);
 		ch_1_out_0 += out_offset;
 		mask_value = 1;
-		if (ch_1_out_0 < activation_min){
+		if (ch_1_out_0 < activation_min) {
 			ch_1_out_0 = activation_min;
 			mask_value = 0;
 		}
-		if (ch_1_out_0 > activation_max){
+		if (ch_1_out_0 > activation_max) {
 			ch_1_out_0 = activation_max;
 			mask_value = 0;
 		}
-		*mask++ = (q7_t) mask_value;
-		*out_0++ = (q7_t) ch_1_out_0;
+		*mask++ = (q7_t)mask_value;
+		*out_0++ = (q7_t)ch_1_out_0;
 
-		ch_1_out_1 = (q31_t) ((float) ch_1_out_1 * scale_1);
+		ch_1_out_1 = (q31_t)((float)ch_1_out_1 * scale_1);
 		ch_1_out_1 += out_offset;
 		mask_value = 1;
-		if (ch_1_out_1 < activation_min){
+		if (ch_1_out_1 < activation_min) {
 			ch_1_out_1 = activation_min;
 			mask_value = 0;
 		}
-		if (ch_1_out_1 > activation_max){
+		if (ch_1_out_1 > activation_max) {
 			ch_1_out_1 = activation_max;
 			mask_value = 0;
 		}
-		*mask1++ = (q7_t) mask_value;
-		*out_1++ = (q7_t) ch_1_out_1;
+		*mask1++ = (q7_t)mask_value;
+		*out_1++ = (q7_t)ch_1_out_1;
 		scales += 2;
 
 		/* skip row */
@@ -1661,12 +1648,10 @@ q7_t* mat_mult_kernel_s8_s16_reordered_fpreq_mask_partialCH_Multiple2(const q7_t
 }
 
 // Note: this is intend for 1x1, others need to be further tested
-q7_t* mat_mult_kernel_s8_s16_reordered_fpreq_bitmask_partialCH_Multiple2(const q7_t *kernel_sram,
-		const q7_t *kernel_flash, const uint16_t first_k_channel,
-		const q15_t *input_b, const uint16_t output_ch, const float *scales,
-		const int32_t out_offset, const int16_t activation_min,
-		const int16_t activation_max, const uint16_t num_col_a,
-		const int32_t *const output_bias, q7_t *out_0, q7_t *mask) {
+q7_t *mat_mult_kernel_s8_s16_reordered_fpreq_bitmask_partialCH_Multiple2(
+	const q7_t *kernel_sram, const q7_t *kernel_flash, const uint16_t first_k_channel, const q15_t *input_b,
+	const uint16_t output_ch, const float *scales, const int32_t out_offset, const int16_t activation_min,
+	const int16_t activation_max, const uint16_t num_col_a, const int32_t *const output_bias, q7_t *out_0, q7_t *mask) {
 	/* set up the second output pointers */
 	q7_t *out_1 = out_0 + output_ch;
 	q7_t *mask1 = mask + output_ch / 8;
@@ -1740,15 +1725,14 @@ q7_t* mat_mult_kernel_s8_s16_reordered_fpreq_bitmask_partialCH_Multiple2(const q
 			col_count--;
 		} /* while over col_count */
 
-
-		ch_0_out_0 = (q31_t) ((float) ch_0_out_0 * scale_0);
+		ch_0_out_0 = (q31_t)((float)ch_0_out_0 * scale_0);
 		ch_0_out_0 += out_offset;
 		q7_t mask_value = 1;
-		if (ch_0_out_0 < activation_min){
+		if (ch_0_out_0 < activation_min) {
 			ch_0_out_0 = activation_min;
 			mask_value = 0;
 		}
-		if (ch_0_out_0 > activation_max){
+		if (ch_0_out_0 > activation_max) {
 			ch_0_out_0 = activation_max;
 			mask_value = 0;
 		}
@@ -1756,18 +1740,16 @@ q7_t* mat_mult_kernel_s8_s16_reordered_fpreq_bitmask_partialCH_Multiple2(const q
 			BIT_SET(*mask, bit_starting_idx);
 		else
 			BIT_CLEAR(*mask, bit_starting_idx);
-		*out_0++ = (q7_t) ch_0_out_0;
+		*out_0++ = (q7_t)ch_0_out_0;
 
-
-
-		ch_0_out_1 = (q31_t) ((float) ch_0_out_1 * scale_0);
+		ch_0_out_1 = (q31_t)((float)ch_0_out_1 * scale_0);
 		ch_0_out_1 += out_offset;
 		mask_value = 1;
-		if (ch_0_out_1 < activation_min){
+		if (ch_0_out_1 < activation_min) {
 			ch_0_out_1 = activation_min;
 			mask_value = 0;
 		}
-		if (ch_0_out_1 > activation_max){
+		if (ch_0_out_1 > activation_max) {
 			ch_0_out_1 = activation_max;
 			mask_value = 0;
 		}
@@ -1775,45 +1757,45 @@ q7_t* mat_mult_kernel_s8_s16_reordered_fpreq_bitmask_partialCH_Multiple2(const q
 			BIT_SET(*mask1, bit_starting_idx);
 		else
 			BIT_CLEAR(*mask1, bit_starting_idx);
-		*out_1++ = (q7_t) ch_0_out_1;
+		*out_1++ = (q7_t)ch_0_out_1;
 
-		ch_1_out_0 = (q31_t) ((float) ch_1_out_0 * scale_1);
+		ch_1_out_0 = (q31_t)((float)ch_1_out_0 * scale_1);
 		ch_1_out_0 += out_offset;
 		mask_value = 1;
-		if (ch_1_out_0 < activation_min){
+		if (ch_1_out_0 < activation_min) {
 			ch_1_out_0 = activation_min;
 			mask_value = 0;
 		}
-		if (ch_1_out_0 > activation_max){
+		if (ch_1_out_0 > activation_max) {
 			ch_1_out_0 = activation_max;
 			mask_value = 0;
 		}
 		if (mask_value == 1)
-			BIT_SET(*mask, bit_starting_idx+1);
+			BIT_SET(*mask, bit_starting_idx + 1);
 		else
-			BIT_CLEAR(*mask, bit_starting_idx+1);
-		*out_0++ = (q7_t) ch_1_out_0;
+			BIT_CLEAR(*mask, bit_starting_idx + 1);
+		*out_0++ = (q7_t)ch_1_out_0;
 
-		ch_1_out_1 = (q31_t) ((float) ch_1_out_1 * scale_1);
+		ch_1_out_1 = (q31_t)((float)ch_1_out_1 * scale_1);
 		ch_1_out_1 += out_offset;
 		mask_value = 1;
-		if (ch_1_out_1 < activation_min){
+		if (ch_1_out_1 < activation_min) {
 			ch_1_out_1 = activation_min;
 			mask_value = 0;
 		}
-		if (ch_1_out_1 > activation_max){
+		if (ch_1_out_1 > activation_max) {
 			ch_1_out_1 = activation_max;
 			mask_value = 0;
 		}
 		if (mask_value == 1)
-			BIT_SET(*mask1, bit_starting_idx+1);
+			BIT_SET(*mask1, bit_starting_idx + 1);
 		else
-			BIT_CLEAR(*mask1, bit_starting_idx+1);
-		*out_1++ = (q7_t) ch_1_out_1;
+			BIT_CLEAR(*mask1, bit_starting_idx + 1);
+		*out_1++ = (q7_t)ch_1_out_1;
 		scales += 2;
 
 		bit_starting_idx += 2;
-		if(bit_starting_idx == 8){
+		if (bit_starting_idx == 8) {
 			bit_starting_idx = 0;
 			mask++;
 			mask1++;
@@ -1831,12 +1813,10 @@ q7_t* mat_mult_kernel_s8_s16_reordered_fpreq_bitmask_partialCH_Multiple2(const q
 	return out_0;
 }
 
-
-q7_t* mat_mult_kernel3_input3_s8_s16_fpreq(const q7_t *input_a,
-		const q15_t *input_b, const uint16_t output_ch, const float *scales,
-		const int32_t out_offset, const int16_t activation_min,
-		const int16_t activation_max, const uint16_t num_col_a,
-		const int32_t *const output_bias, q7_t *out_0, q15_t *kbuf) {
+q7_t *mat_mult_kernel3_input3_s8_s16_fpreq(const q7_t *input_a, const q15_t *input_b, const uint16_t output_ch,
+										   const float *scales, const int32_t out_offset, const int16_t activation_min,
+										   const int16_t activation_max, const uint16_t num_col_a,
+										   const int32_t *const output_bias, q7_t *out_0, q15_t *kbuf) {
 	/* set up the second output pointers */
 	q7_t *out_1 = out_0 + output_ch;
 	const int32_t *bias = output_bias;
@@ -1979,29 +1959,29 @@ q7_t* mat_mult_kernel3_input3_s8_s16_fpreq(const q7_t *input_a,
 		ch_1_out_0 += ksrc2[26] * _b0;
 		ch_1_out_1 += ksrc2[26] * _b1;
 
-		ch_0_out_0 = (q31_t) ((float) ch_0_out_0 * scale_0);
+		ch_0_out_0 = (q31_t)((float)ch_0_out_0 * scale_0);
 		ch_0_out_0 += out_offset;
 		ch_0_out_0 = MAX(ch_0_out_0, activation_min);
 		ch_0_out_0 = MIN(ch_0_out_0, activation_max);
-		*out_0++ = (q7_t) ch_0_out_0;
+		*out_0++ = (q7_t)ch_0_out_0;
 
-		ch_0_out_1 = (q31_t) ((float) ch_0_out_1 * scale_0);
+		ch_0_out_1 = (q31_t)((float)ch_0_out_1 * scale_0);
 		ch_0_out_1 += out_offset;
 		ch_0_out_1 = MAX(ch_0_out_1, activation_min);
 		ch_0_out_1 = MIN(ch_0_out_1, activation_max);
-		*out_1++ = (q7_t) ch_0_out_1;
+		*out_1++ = (q7_t)ch_0_out_1;
 
-		ch_1_out_0 = (q31_t) ((float) ch_1_out_0 * scale_1);
+		ch_1_out_0 = (q31_t)((float)ch_1_out_0 * scale_1);
 		ch_1_out_0 += out_offset;
 		ch_1_out_0 = MAX(ch_1_out_0, activation_min);
 		ch_1_out_0 = MIN(ch_1_out_0, activation_max);
-		*out_0++ = (q7_t) ch_1_out_0;
+		*out_0++ = (q7_t)ch_1_out_0;
 
-		ch_1_out_1 = (q31_t) ((float) ch_1_out_1 * scale_1);
+		ch_1_out_1 = (q31_t)((float)ch_1_out_1 * scale_1);
 		ch_1_out_1 += out_offset;
 		ch_1_out_1 = MAX(ch_1_out_1, activation_min);
 		ch_1_out_1 = MIN(ch_1_out_1, activation_max);
-		*out_1++ = (q7_t) ch_1_out_1;
+		*out_1++ = (q7_t)ch_1_out_1;
 		scales += 2;
 
 		/* skip row */
@@ -2014,4 +1994,3 @@ q7_t* mat_mult_kernel3_input3_s8_s16_fpreq(const q7_t *input_a,
 	/* return the new output pointer with offset */
 	return out_0;
 }
-
