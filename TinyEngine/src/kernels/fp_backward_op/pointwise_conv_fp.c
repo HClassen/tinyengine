@@ -17,8 +17,9 @@
  * Target ISA:  ARMv7E-M
  * -------------------------------------------------------------------- */
 
-#include "tinyengine_function_fp.h"
-#include "tinyengine_function.h"
+#include "tinyengine/types.h"
+#include "tinyengine/base_ops.h"
+
 #include "nnfunctions_fp.h"
 #define DIM_KER_X (1U)
 #define DIM_KER_Y (1U)

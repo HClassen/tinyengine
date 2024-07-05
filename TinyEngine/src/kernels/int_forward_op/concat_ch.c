@@ -16,8 +16,9 @@
  * Target ISA:  ARMv7E-M
  * -------------------------------------------------------------------- */
 
+#include "tinyengine/types.h"
+
 #include "arm_nnfunctions.h"
-#include "tinyengine_function.h"
 
 tinyengine_status concat_ch(const q7_t *input1, const uint16_t input_x, const uint16_t input_y,
 							const uint16_t input1_ch, const q7_t *input2, const uint16_t input2_ch, q7_t *output) {

@@ -510,10 +510,10 @@ void invoke_1patch(uint16_t pad_t, uint16_t pad_b, uint16_t pad_l ,uint16_t pad_
     def _includeHeaders(self):
         include_string = """/* Automatically generated source file */
 #include <float.h>
-#include <tinyengine_function.h>
-#include <tinyengine_function_fp.h>
+#include <stddef.h>
 
-#include "genNN.h"
+#include "tinyengine/tinyengine.h"
+
 #include "genModel.h"
 #include "genInclude.h"
 """
@@ -523,7 +523,7 @@ void invoke_1patch(uint16_t pad_t, uint16_t pad_b, uint16_t pad_l ,uint16_t pad_
         include_string += (
             """
 /* Variables used by all ops */
-ADD_params add_params;
+struct add_params add_params;
 int i;
 int8_t *int8ptr,*int8ptr2;
 int32_t *int32ptr;

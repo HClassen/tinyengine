@@ -17,7 +17,7 @@
  * Target ISA:  ARMv7E-M
  * -------------------------------------------------------------------- */
 
-#include "tinyengine_function_fp.h"
+#include "tinyengine/types.h"
 
 tinyengine_status_fp sum_2D(const float* input_data, const uint16_t matA_row, const uint16_t matA_col,
 							const uint16_t axis, float* output_data) {

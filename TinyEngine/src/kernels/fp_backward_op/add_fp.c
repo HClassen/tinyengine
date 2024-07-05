@@ -17,7 +17,7 @@
  * Target ISA:  ARMv7E-M
  * -------------------------------------------------------------------- */
 
-#include "tinyengine_function_fp.h"
+#include "tinyengine/types.h"
 
 tinyengine_status_fp add_fp(const uint16_t size, const float* input1_data, const float* input2_data,
 							float* output_data) {

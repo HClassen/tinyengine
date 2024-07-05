@@ -19,9 +19,10 @@
 #include <float.h>
 #include <math.h>
 
-#include "tinyengine_function.h"
+#include "tinyengine/types.h"
+#include "tinyengine/base_ops.h"
 
-tinyengine_status statble_softmax_inplace(float *input, const uint16_t length) {
+tinyengine_status stable_softmax_inplace(float *input, const uint16_t length) {
 	float max = FLT_MIN;
 	float exp_sum = 0;
 

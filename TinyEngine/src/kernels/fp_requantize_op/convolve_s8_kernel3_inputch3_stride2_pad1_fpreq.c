@@ -16,11 +16,13 @@
  * Target ISA:  ARMv7E-M
  * -------------------------------------------------------------------- */
 
+#include "tinyengine/types.h"
+#include "tinyengine/base_ops.h"
+
 #include "arm_math.h"
 #include "arm_nnfunctions.h"
 #include "arm_nnsupportfunctions.h"
 #include "img2col_element.h"
-#include "tinyengine_function.h"
 
 tinyengine_status convolve_s8_kernel3_inputch3_stride2_pad1_fpreq(const q7_t *input, const uint16_t input_x, const uint16_t input_y, const uint16_t input_ch, const q7_t *kernel,
 	                                                              const int32_t *bias, const float *scales, const int32_t output_offset, const int32_t input_offset,

@@ -16,7 +16,8 @@
  * Target ISA:  ARMv7E-M
  * -------------------------------------------------------------------- */
 
-#include "tinyengine_function.h"
+#include "tinyengine/types.h"
+#include "tinyengine/base_ops.h"
 
 tinyengine_status mat_mul_fp(const float* matA, const uint16_t matA_row, const uint16_t matA_col, const float* matB,
 							 const uint16_t matB_col, float* output) {

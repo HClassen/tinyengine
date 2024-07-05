@@ -16,7 +16,8 @@
  * Target ISA:  ARMv7E-M
  * -------------------------------------------------------------------- */
 
-#include "tinyengine_function.h"
+#include "tinyengine/types.h"
+#include "tinyengine/base_ops.h"
 
 /*
  * Spatial elementwise multiplications for nxnxc * 1x1xc

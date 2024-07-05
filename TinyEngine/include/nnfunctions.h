@@ -17,8 +17,11 @@
  * Target ISA:  ARMv7E-M
  * -------------------------------------------------------------------- */
 
-#include "arm_nnsupportfunctions.h"
 #include <stdlib.h>
+
+#include "tinyengine/base_ops.h"
+
+#include "arm_nnsupportfunctions.h"
 
 /* START: MAC Functions for Pointwise Conv */
 static inline void mac_4row_4col_IOHW_forint8w(q31_t* sum, const q7_t* input_0, const q7_t* input_1,

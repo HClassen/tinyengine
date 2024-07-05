@@ -104,8 +104,11 @@ class depthwiseInplace_mask(object):
             + """
  * Author: wmchen@mit.edu
  * -------------------------------------------------------------------- */
-#include "arm_nnsupportfunctions.h" //TODO: remove this in the future for self-contained
-#include "tinyengine_function.h"\n"""
+
+#include "tinyengine/tinyengine.h"
+
+#include "arm_nnsupportfunctions.h" //TODO: remove this in the future for self-contained\n
+"""
         )
 
         return retString
@@ -636,8 +639,8 @@ class depthwiseInplace_mask(object):
 #include "scratch_buffer.h"
 extern "C"
 {
+#include "tinyengine/tinyengine.h"
 #include "kernel_buffer.h"
-#include "tinyengine_function.h"
 }
 UART_HandleTypeDef UART;
 void printLog(const char* s) {

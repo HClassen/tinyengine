@@ -18,8 +18,11 @@
  * Target ISA:  ARMv7E-M
  * -------------------------------------------------------------------- */
 
+#include "tinyengine/types.h"
+#include "tinyengine/base_ops.h"
+
 #include "arm_nnsupportfunctions.h" //TODO: remove this in the future for self-contained
-#include "tinyengine_function.h"
+
 void patch_depthwise_kernel3x3_stride1_inplace_kernel_CHW(const uint16_t output_y, const uint16_t output_x,
 														  const int32_t *bias, const int32_t *biasR, const q7_t *ksrc,
 														  const int32_t *multiplier, const int32_t *shift, q7_t *output,

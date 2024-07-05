@@ -15,9 +15,12 @@
  *
  * Target ISA:  ARMv7E-M
  * -------------------------------------------------------------------- */
-#include "yoloOutput.h"
 
-#include "tinyengine_function.h"
+#include <math.h>
+#include <stdint.h>
+
+#include "tinyengine/base_ops.h"
+#include <tinyengine/yolo_output.h>
 
 #define MAX_BOX_PER_CLASS 10
 #define MAX_NUM_CLASSES 4

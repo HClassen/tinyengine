@@ -16,7 +16,8 @@
  * Target ISA:  ARMv7E-M
  * -------------------------------------------------------------------- */
 
-#include "tinyengine_function.h"
+#include "tinyengine/types.h"
+#include "tinyengine/base_ops.h"
 
 tinyengine_status fully_connected_fp(const float *input, const uint16_t input_x, const uint16_t input_y,
 									 const uint16_t input_ch, const uint16_t output_ch, const float *bias,

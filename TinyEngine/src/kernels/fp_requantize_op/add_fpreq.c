@@ -17,8 +17,11 @@
  * -------------------------------------------------------------------- */
 
 #include <math.h>
+
+#include "tinyengine/types.h"
+#include "tinyengine/base_ops.h"
+
 #include "arm_math.h"
-#include "tinyengine_function.h"
 
 tinyengine_status add_fpreq(int size, const int8_t* input1_data, const float input1_scale, const float input1_zero,
 							const int8_t* input2_data, const float input2_scale, const float input2_zero,

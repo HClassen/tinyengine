@@ -180,7 +180,9 @@ class depthwiseInplace:
             + """
  * Author: wmchen@mit.edu
  * -------------------------------------------------------------------- */
-#include "tinyengine_function.h"\n"""
+
+#include "tinyengine/tinyengine.h"\n
+"""
         )
 
         return retString

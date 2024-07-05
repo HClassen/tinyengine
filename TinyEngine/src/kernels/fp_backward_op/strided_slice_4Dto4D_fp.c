@@ -17,7 +17,7 @@
  * Target ISA:  ARMv7E-M
  * -------------------------------------------------------------------- */
 
-#include "tinyengine_function_fp.h"
+#include "tinyengine/types.h"
 
 tinyengine_status_fp strided_slice_4Dto4D(const float* input, const uint16_t inn, const uint16_t inc,
 										  const uint16_t inh, const uint16_t inw, const uint16_t* begin,

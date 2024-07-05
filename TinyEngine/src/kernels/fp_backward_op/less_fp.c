@@ -16,8 +16,9 @@
  *
  * Target ISA:  ARMv7E-M
  * -------------------------------------------------------------------- */
+#include <stdbool.h>
 
-#include "tinyengine_function_fp.h"
+#include "tinyengine/types.h"
 
 tinyengine_status_fp less(const uint16_t size, const float* input1_data, const float* input2_data, bool* output_data) {
 	int i;

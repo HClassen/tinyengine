@@ -16,7 +16,8 @@
  * Target ISA:  ARMv7E-M
  * -------------------------------------------------------------------- */
 
-#include "tinyengine_function.h"
+#include "tinyengine/types.h"
+#include "tinyengine/base_ops.h"
 
 tinyengine_status avg_pooling(const q7_t* input, const uint16_t input_h, const uint16_t input_w, const uint16_t input_c,
 							  const uint16_t sample_h, const uint16_t sample_w, const uint16_t output_h,

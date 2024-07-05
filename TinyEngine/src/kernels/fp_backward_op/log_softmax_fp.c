@@ -4,8 +4,11 @@
  * Contact author: Wei-Chen Wang, wweichen@mit.edu
  * -------------------------------------------------------------------- */
 
-#include "tinyengine_function_fp.h"
-#include "tinyengine_function.h"
+#include <math.h>
+#include <float.h>
+
+#include "tinyengine/types.h"
+#include "tinyengine/base_ops.h"
 
 tinyengine_status_fp LogSoftmax(const float* input_data, const uint16_t input_height, const uint16_t input_width,
 								const uint16_t input_depth, float* output_data, const uint16_t output_height,

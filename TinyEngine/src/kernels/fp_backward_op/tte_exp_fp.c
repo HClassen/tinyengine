@@ -17,7 +17,9 @@
  * Target ISA:  ARMv7E-M
  * -------------------------------------------------------------------- */
 
-#include "tinyengine_function_fp.h"
+#include <math.h>
+
+#include "tinyengine/types.h"
 
 tinyengine_status_fp tte_exp(const uint16_t size, const float* input_data, float* output_data) {
 	int i;

@@ -17,7 +17,7 @@
  * Target ISA:  ARMv7E-M
  * -------------------------------------------------------------------- */
 
-#include "tinyengine_function_fp.h"
+#include "tinyengine/types.h"
 
 tinyengine_status_fp sum_4D_exclude(const float* input_data, const uint16_t d1, const uint16_t d2, const uint16_t d3,
 									const uint16_t d4, const uint16_t axis, float* output_data) {

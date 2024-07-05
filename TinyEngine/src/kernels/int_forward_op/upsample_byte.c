@@ -16,8 +16,9 @@
  * Target ISA:  ARMv7E-M
  * -------------------------------------------------------------------- */
 
+#include "tinyengine/types.h"
+
 #include "arm_nnfunctions.h"
-#include "tinyengine_function.h"
 
 tinyengine_status upsample_byte(const q7_t *input, const uint16_t input_x, const uint16_t input_y,
 								const uint16_t input_ch, q7_t *output, const uint16_t sample_factor) {

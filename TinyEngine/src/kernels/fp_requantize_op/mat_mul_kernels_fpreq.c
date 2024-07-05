@@ -16,9 +16,10 @@
  * Target ISA:  ARMv7E-M
  * -------------------------------------------------------------------- */
 
+#include "tinyengine/types.h"
+#include "tinyengine/base_ops.h"
+
 #include "arm_nnsupportfunctions.h"
-#include "tinyengine_lib.h"
-#include "tinyengine_function.h"
 
 q7_t *mat_mult_kernel_s8_s16_reordered_ch48_fpreq(const q7_t *input_a, const q15_t *input_b, const uint16_t output_ch,
 												  const float *scales, const int32_t out_offset,

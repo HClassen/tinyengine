@@ -18,8 +18,11 @@
 
 #include <math.h>
 
+#include "tinyengine/types.h"
+#include "tinyengine/base_ops.h"
+#include <tinyengine/int/base_ops.h>
+
 #include "arm_math.h"
-#include "tinyengine_function.h"
 
 int32_t Add(int32_t a, int32_t b) { return a + b; }
 int32_t ShiftRight(int32_t a, int offset) { return a >> offset; }
@@ -57,7 +60,7 @@ static inline int32_t MultiplyByQuantizedMultiplierSmallerThanOneExp(int32_t x, 
 	return RoundingDivideByPOT(SaturatingRoundingDoublingHighMul(x, quantized_multiplier), -left_shift);
 }
 
-tinyengine_status add(int size, ADD_params* params, const int8_t* input1_data, const int8_t* input2_data,
+tinyengine_status add(int size, struct add_params* params, const int8_t* input1_data, const int8_t* input2_data,
 					  int8_t* output_data) {
 	for (int i = 0; i < size; ++i) {
 		const int32_t input1_val = params->input1_offset + input1_data[i];

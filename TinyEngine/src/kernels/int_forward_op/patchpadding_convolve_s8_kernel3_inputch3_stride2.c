@@ -17,11 +17,13 @@
  * Target ISA:  ARMv7E-M
  * -------------------------------------------------------------------- */
 
+#include "tinyengine/types.h"
+#include "tinyengine/base_ops.h"
+
 #include "arm_math.h"
 #include "arm_nnfunctions.h"
 #include "arm_nnsupportfunctions.h"
 #include "img2col_element.h"
-#include "tinyengine_function.h"
 
 #define HOLD_KERNEL
 

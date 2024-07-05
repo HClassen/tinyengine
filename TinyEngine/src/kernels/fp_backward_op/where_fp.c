@@ -17,8 +17,11 @@
  * Target ISA:  ARMv7E-M
  * -------------------------------------------------------------------- */
 
-#include "tinyengine_function_fp.h"
-#include "tinyengine_function.h"
+#include <math.h>
+#include <stdbool.h>
+
+#include "tinyengine/types.h"
+#include "tinyengine/base_ops.h"
 
 tinyengine_status_fp where(const bool* inMask, const uint16_t size, const float* input1_data, const float* input2_data,
 						   float* output_data) {

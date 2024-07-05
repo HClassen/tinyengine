@@ -17,7 +17,7 @@
  * Target ISA:  ARMv7E-M
  * -------------------------------------------------------------------- */
 
-#include "tinyengine_function_fp.h"
+#include "tinyengine/types.h"
 
 tinyengine_status_fp nll_loss(const float* input_data, const uint16_t input_dim, const uint16_t input_depth,
 							  const float* target, const uint16_t target_size, float* output_data) {

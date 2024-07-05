@@ -16,8 +16,9 @@
  * Target ISA:  ARMv7E-M
  * -------------------------------------------------------------------- */
 
+#include "tinyengine/types.h"
+
 #include "arm_nnsupportfunctions.h"
-#include "tinyengine_lib.h"
 
 /*
  * Matrix-multiplication function for convolution with uint8
