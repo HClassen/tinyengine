@@ -23,7 +23,7 @@
 #include "arm_math.h"
 #include "arm_nnfunctions.h"
 #include "arm_nnsupportfunctions.h"
-#include "img2col_element.h"
+#include "../img2col_element.h"
 
 tinyengine_status convolve_s8_kernel2x3_inputch3_stride2_pad1(const q7_t *input, const uint16_t input_x, const uint16_t input_y, const uint16_t input_ch, const q7_t *kernel,
 	                                                          const int32_t *bias, const int32_t *output_shift, const int32_t *output_mult, const int32_t output_offset,
@@ -127,12 +127,12 @@ tinyengine_status convolve_s8_kernel2x3_inputch3_stride2_pad1(const q7_t *input,
 					src3 = src2 + input_row_offset;
 
 					// 4 * 2 + 1 = 9
-					q7_q15_offset_ele(src, dst)
-                    q7_q15_offset_ele(src, dst)
+					q7_q15_offset_ele(src, dst);
+                    q7_q15_offset_ele(src, dst);
                     *dst++ = *src++ + input_offset;
 					// 4 * 2 + 1 = 9
-					q7_q15_offset_ele(src2, dst2)
-                    q7_q15_offset_ele(src2, dst2)
+					q7_q15_offset_ele(src2, dst2);
+                    q7_q15_offset_ele(src2, dst2);
                     *dst2++ = *src2++ + input_offset;
 				} else {
 					// first element is pad
@@ -150,11 +150,11 @@ tinyengine_status convolve_s8_kernel2x3_inputch3_stride2_pad1(const q7_t *input,
 					*dst2++ = pad_out;
 					// load 6 elements
 					// 4 * 1 + 2 = 6
-					q7_q15_offset_ele(src, dst)
+					q7_q15_offset_ele(src, dst);
                     *dst++ = *src++ + input_offset;
 					*dst++ = *src++ + input_offset;
 					// 4 * 1 + 2 = 6
-					q7_q15_offset_ele(src2, dst2)
+					q7_q15_offset_ele(src2, dst2);
                     *dst2++ = *src2++ + input_offset;
 					*dst2++ = *src2++ + input_offset;
 				}
@@ -172,8 +172,8 @@ tinyengine_status convolve_s8_kernel2x3_inputch3_stride2_pad1(const q7_t *input,
 					src2 = input + (base_idx_x)*input_ch;
 
 					// 4 * 2 + 1 = 9
-					q7_q15_offset_ele(src2, dst2)
-                    q7_q15_offset_ele(src2, dst2)
+					q7_q15_offset_ele(src2, dst2);
+                    q7_q15_offset_ele(src2, dst2);
                     *dst2++ = *src2++ + input_offset;
 				} else {
 					src2 = input;
@@ -183,7 +183,7 @@ tinyengine_status convolve_s8_kernel2x3_inputch3_stride2_pad1(const q7_t *input,
 					*dst2++ = pad_out;
 					*dst2++ = pad_out;
 					// load 6 elements
-					q7_q15_offset_ele(src2, dst2)
+					q7_q15_offset_ele(src2, dst2);
                     *dst2++ = *src2++ + input_offset;
 					*dst2++ = *src2++ + input_offset;
 				}

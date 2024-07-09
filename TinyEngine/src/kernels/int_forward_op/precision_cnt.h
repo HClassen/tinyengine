@@ -16,8 +16,8 @@
  * Target ISA:  ARMv7E-M
  * -------------------------------------------------------------------- */
 
-#ifndef TINYENGINE_SOURCE_CONVOLUTIONFUNCTIONS_MIX_PRECISION_CNT_H_
-#define TINYENGINE_SOURCE_CONVOLUTIONFUNCTIONS_MIX_PRECISION_CNT_H_
+#ifndef TINYENGINE_PRECISION_CNT_H_
+#define TINYENGINE_PRECISION_CNT_H_
 
 /* MIX precision */
 #define INPUT_PRE 8
@@ -27,4 +27,4 @@
 #define weight_scaler (8 / KERNEL_PRE)
 #define output_scaler (8 / OUTPUT_PRE)
 
-#endif /* TINYENGINE_SOURCE_CONVOLUTIONFUNCTIONS_MIX_PRECISION_CNT_H_ */
+#endif /* TINYENGINE_PRECISION_CNT_H_ */

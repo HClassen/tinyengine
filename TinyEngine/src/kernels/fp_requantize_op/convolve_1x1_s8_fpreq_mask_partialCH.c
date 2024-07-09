@@ -21,7 +21,7 @@
 #include "tinyengine/base_ops.h"
 
 #include "arm_nnfunctions.h"
-#include "img2col_element.h"
+#include "../img2col_element.h"
 
 #define DIM_KER_X (1U)
 #define DIM_KER_Y (1U)
@@ -62,8 +62,8 @@ tinyengine_status convolve_1x1_s8_fpreq_bitmask_partialCH(const q7_t *input, con
 		if (first_k_channel % 4 == 0) {
 			int cnt = channel_div4; //two columns
 			while (cnt > 0) {
-				q7_q15_offset_reordered_ele(src, dst)
-                q7_q15_offset_reordered_ele(src, dst)
+				q7_q15_offset_reordered_ele(src, dst);
+                q7_q15_offset_reordered_ele(src, dst);
                 cnt--;
 			}
 
@@ -113,7 +113,8 @@ tinyengine_status convolve_1x1_s8_fpreq_bitmask_partialCH(const q7_t *input, con
 		if (first_k_channel % 4 == 0) {
 			int cnt = channel_div4; //two * numof2col columns
 			while (cnt > 0) {
-				q7_q15_offset_reordered_ele(src, dst) cnt--;
+				q7_q15_offset_reordered_ele(src, dst);
+                cnt--;
 			}
 
 			for (int32_t i_ch_out = 0; i_ch_out < output_ch; i_ch_out++) {
@@ -284,7 +285,9 @@ tinyengine_status convolve_1x1_s8_fpreq_mask_partialCH(
 		if (first_k_channel % 4 == 0) {
 			int cnt = channel_div4; //two columns
 			while (cnt > 0) {
-				q7_q15_offset_reordered_ele(src, dst) q7_q15_offset_reordered_ele(src, dst) cnt--;
+				q7_q15_offset_reordered_ele(src, dst);
+                q7_q15_offset_reordered_ele(src, dst);
+                cnt--;
 			}
 			out = mat_mult_kernel_s8_s16_reordered_fpreq_mask_partialCH(
 				kernel_sram, kernel_flash, first_k_channel, two_column_buffer, output_ch, scales, (q7_t)out_offset,
@@ -332,7 +335,8 @@ tinyengine_status convolve_1x1_s8_fpreq_mask_partialCH(
 		if (first_k_channel % 4 == 0) {
 			int cnt = channel_div4; //two * numof2col columns
 			while (cnt > 0) {
-				q7_q15_offset_reordered_ele(src, dst) cnt--;
+				q7_q15_offset_reordered_ele(src, dst);
+                cnt--;
 			}
 			for (i_ch_out = 0; i_ch_out < output_ch; i_ch_out++) {
 				q31_t sum = bias[i_ch_out];

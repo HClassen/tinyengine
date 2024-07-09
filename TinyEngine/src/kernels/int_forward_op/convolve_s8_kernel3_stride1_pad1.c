@@ -23,7 +23,7 @@
 #include "arm_math.h"
 #include "arm_nnfunctions.h"
 #include "arm_nnsupportfunctions.h"
-#include "img2col_element.h"
+#include "../img2col_element.h"
 
 tinyengine_status convolve_s8_kernel3_stride1_pad1(const q7_t *input, const uint16_t input_x, const uint16_t input_y, const uint16_t input_ch, const q7_t *kernel,
 	                                               const int32_t *bias, const int32_t *output_shift, const int32_t *output_mult, const int32_t output_offset,
@@ -98,7 +98,7 @@ tinyengine_status convolve_s8_kernel3_stride1_pad1(const q7_t *input, const uint
 					q31_t *dst2_31 = (q31_t *)&col_buffer[input_ch * 3];
 					q31_t *dst3_31 = (q31_t *)&col_buffer[input_ch * 6];
 
-					pad_3row_1col(dst_31, dst2_31, dst3_31, pad_out_q15x2)
+					pad_3row_1col(dst_31, dst2_31, dst3_31, pad_out_q15x2);
 
 					/* load input to 2 col*/
 					const q7_t *src = input + base_idx_y * input_x * input_ch;
@@ -108,7 +108,7 @@ tinyengine_status convolve_s8_kernel3_stride1_pad1(const q7_t *input, const uint
 					q15_t *dst2 = dst2_31;
 					q15_t *dst3 = dst3_31;
 
-					load_3row_2col(src, src2, src3, dst, dst2, dst3)
+					load_3row_2col(src, src2, src3, dst, dst2, dst3);
 				} else if (base_idx_x + 2 == input_x) {
 					/* load 2 col */
 					const q7_t *src = input + (base_idx_y * input_x + base_idx_x) * input_ch;
@@ -118,14 +118,14 @@ tinyengine_status convolve_s8_kernel3_stride1_pad1(const q7_t *input, const uint
 					q15_t *dst2 = (q31_t *)&col_buffer[input_ch * 3];
 					q15_t *dst3 = (q31_t *)&col_buffer[input_ch * 6];
 
-					load_3row_2col(src, src2, src3, dst, dst2, dst3)
+					load_3row_2col(src, src2, src3, dst, dst2, dst3);
 
 					q31_t *dst_31 = (q31_t *)dst;
 					q31_t *dst2_31 = (q31_t *)dst2;
 					q31_t *dst3_31 = (q31_t *)dst3;
 
 					/* use pad for the last 1 col*/
-					pad_3row_1col(dst_31, dst2_31, dst3_31, pad_out_q15x2)
+					pad_3row_1col(dst_31, dst2_31, dst3_31, pad_out_q15x2);
 				} else {
 					/* load 3 col */
 					const q7_t *src = input + (base_idx_y * input_x + base_idx_x) * input_ch;
@@ -135,14 +135,14 @@ tinyengine_status convolve_s8_kernel3_stride1_pad1(const q7_t *input, const uint
 					q15_t *dst2 = (q31_t *)&col_buffer[input_ch * 3];
 					q15_t *dst3 = (q31_t *)&col_buffer[input_ch * 6];
 
-					load_3row_3col(src, src2, src3, dst, dst2, dst3)
+					load_3row_3col(src, src2, src3, dst, dst2, dst3);
 				}
 			} else if (ypad_cnt == 1) { // filled the last two rows
 				if (base_idx_x == -1) {
 					/* use pad for the first 1 col */
 					q31_t *dst_31 = &col_buffer[input_ch * 3];
 					q31_t *dst2_31 = &col_buffer[input_ch * 6];
-					pad_2row_1col(dst_31, dst2_31, pad_out_q15x2)
+					pad_2row_1col(dst_31, dst2_31, pad_out_q15x2);
 
 					/* load input to 2 col*/
 					const q7_t *src = input + 0;
@@ -150,7 +150,7 @@ tinyengine_status convolve_s8_kernel3_stride1_pad1(const q7_t *input, const uint
 					q15_t *dst = dst_31;
 					q15_t *dst2 = dst2_31;
 
-					load_2row_2col(src, src2, dst, dst2)
+					load_2row_2col(src, src2, dst, dst2);
 				} else if (base_idx_x + 2 == input_x) {
 					/* load 2 col*/
 					q31_t *dst = &col_buffer[input_ch * 3];
@@ -158,11 +158,12 @@ tinyengine_status convolve_s8_kernel3_stride1_pad1(const q7_t *input, const uint
 					const q7_t *src = input + base_idx_x * input_ch;
 					const q7_t *src2 = src + in_row_offset;
 
-					load_2row_2col(src, src2, dst, dst2) q31_t *dst_31 = (q31_t *)dst;
+					load_2row_2col(src, src2, dst, dst2);
+                    q31_t *dst_31 = (q31_t *)dst;
 					q31_t *dst2_31 = (q31_t *)dst2;
 
 					/* use pad for the last 1 col*/
-					pad_2row_1col(dst_31, dst2_31, pad_out_q15x2)
+					pad_2row_1col(dst_31, dst2_31, pad_out_q15x2);
 				} else {
 					/* load 3 col*/
 					q15_t *dst = &col_buffer[input_ch * 3];
@@ -170,7 +171,7 @@ tinyengine_status convolve_s8_kernel3_stride1_pad1(const q7_t *input, const uint
 					const q7_t *src = input + base_idx_x * input_ch;
 					const q7_t *src2 = src + in_row_offset;
 
-					load_2row_3col(src, src2, dst, dst2)
+					load_2row_3col(src, src2, dst, dst2);
 				}
 			} else { // filled the first two rows
 				if (base_idx_x == -1) {
@@ -178,7 +179,7 @@ tinyengine_status convolve_s8_kernel3_stride1_pad1(const q7_t *input, const uint
 					q31_t *dst_31 = (q31_t *)&col_buffer[0];
 					q31_t *dst2_31 = (q31_t *)&col_buffer[input_ch * 3];
 
-					pad_2row_1col(dst_31, dst2_31, pad_out_q15x2)
+					pad_2row_1col(dst_31, dst2_31, pad_out_q15x2);
 
 					/* load input to 2 col*/
 					const q7_t *src = input + (base_idx_y * input_x) * input_ch;
@@ -186,7 +187,7 @@ tinyengine_status convolve_s8_kernel3_stride1_pad1(const q7_t *input, const uint
 					q15_t *dst = dst_31;
 					q15_t *dst2 = dst2_31;
 
-					load_2row_2col(src, src2, dst, dst2)
+					load_2row_2col(src, src2, dst, dst2);
 				} else if (base_idx_x + 2 == input_x) {
 					/* load 2 col*/
 					q15_t *dst = &col_buffer[input_ch * 0];
@@ -194,13 +195,13 @@ tinyengine_status convolve_s8_kernel3_stride1_pad1(const q7_t *input, const uint
 					const q7_t *src = input + (base_idx_y * input_x + base_idx_x) * input_ch;
 					const q7_t *src2 = src + in_row_offset;
 
-					load_2row_2col(src, src2, dst, dst2)
+					load_2row_2col(src, src2, dst, dst2);
 
 					/* use pad for the last 1 col*/
 					q31_t *dst_31 = (q31_t *)dst;
 					q31_t *dst2_31 = (q31_t *)dst2;
 
-					pad_2row_1col(dst_31, dst2_31, pad_out_q15x2)
+					pad_2row_1col(dst_31, dst2_31, pad_out_q15x2);
 				} else {
 					/* load 3 col*/
 					q15_t *dst = &col_buffer[input_ch * 0];
@@ -209,7 +210,7 @@ tinyengine_status convolve_s8_kernel3_stride1_pad1(const q7_t *input, const uint
 					const q7_t *src = input + (base_idx_y * input_x + base_idx_x) * input_ch;
 					const q7_t *src2 = src + in_row_offset;
 
-					load_2row_3col(src, src2, dst, dst2)
+					load_2row_3col(src, src2, dst, dst2);
 				}
 			}
 

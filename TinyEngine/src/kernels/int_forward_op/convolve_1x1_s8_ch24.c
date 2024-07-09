@@ -21,7 +21,7 @@
 
 #include "arm_nnfunctions.h"
 #include "arm_nnsupportfunctions.h"
-#include "img2col_element.h"
+#include "../img2col_element.h"
 
 #define DIM_KER_X (1U)
 #define DIM_KER_Y (1U)
@@ -59,8 +59,8 @@ tinyengine_status convolve_1x1_s8_ch24(const q7_t *input, const uint16_t input_x
 
 		int cnt = channel_div4; // two columns
 		while (cnt > 0) {
-			q7_q15_offset_reordered_ele(src, dst)
-            q7_q15_offset_reordered_ele(src, dst)
+			q7_q15_offset_reordered_ele(src, dst);
+            q7_q15_offset_reordered_ele(src, dst);
             cnt--;
 		}
 
@@ -84,7 +84,8 @@ tinyengine_status convolve_1x1_s8_ch24(const q7_t *input, const uint16_t input_x
 
 		int cnt = channel_div4; // two * numof2col columns
 		while (cnt > 0) {
-			q7_q15_offset_reordered_ele(src, dst) cnt--;
+			q7_q15_offset_reordered_ele(src, dst);
+            cnt--;
 		}
 
 		for (int32_t i_ch_out = 0; i_ch_out < output_ch; i_ch_out++) {

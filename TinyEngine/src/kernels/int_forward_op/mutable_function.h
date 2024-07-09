@@ -16,8 +16,10 @@
  * Target ISA:  ARMv7E-M
  * -------------------------------------------------------------------- */
 
-#ifndef TINYENGINE_SOURCE_CONVOLUTIONFUNCTIONS_MIX_MUTABLE_FUNCTION_H_
-#define TINYENGINE_SOURCE_CONVOLUTIONFUNCTIONS_MIX_MUTABLE_FUNCTION_H_
+#ifndef TINYENGINE_MUTABLE_FUNCTION_H_
+#define TINYENGINE_MUTABLE_FUNCTION_H_
+
+#include "precision_cnt.h"
 
 /* mutable functions */
 #if KERNEL_PRE == 4
@@ -232,4 +234,4 @@
 #define mix_nn_mat_mult_kernel_s8_s16_reordered_8mul arm_nn_mat_mult_kernel_s8_s16_reordered_8mul
 #endif
 
-#endif /* TINYENGINE_SOURCE_CONVOLUTIONFUNCTIONS_MIX_MUTABLE_FUNCTION_H_ */
+#endif /* TINYENGINE_MUTABLE_FUNCTION_H_ */

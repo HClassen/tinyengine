@@ -23,7 +23,6 @@
 #include "arm_math.h"
 #include "arm_nnfunctions.h"
 #include "arm_nnsupportfunctions.h"
-#include "img2col_element.h"
 
 tinyengine_status patchpadding_kbuf_convolve_s8_kernel3_inputch3_stride2(const q7_t *input, const uint16_t input_x, const uint16_t input_y, const uint16_t input_ch, const q7_t *kernel,
 	                                                                     const q31_t *kbuf, const int32_t *bias, const int32_t *output_shift, const int32_t *output_mult,

@@ -23,7 +23,6 @@
 #include "arm_math.h"
 #include "arm_nnfunctions.h"
 #include "arm_nnsupportfunctions.h"
-#include "img2col_element.h"
 
 #define HOLD_KERNEL
 

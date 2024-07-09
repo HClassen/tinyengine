@@ -134,8 +134,8 @@
  * TensorFlow Lite framework.
  */
 
-#ifndef _ARM_NNFUNCTIONS_H
-#define _ARM_NNFUNCTIONS_H
+#ifndef _ARM_NNFUNCTIONS_MODIFIED_H
+#define _ARM_NNFUNCTIONS_MODIFIED_H
 
 #include "arm_nn_math_types.h"
 #include "arm_nn_types.h"
@@ -197,4 +197,4 @@ q7_t *arm_nn_mat_mult_kernel3_input3_s8_s16(const q7_t *input_a, const q15_t *in
 }
 #endif
 
-#endif
+#endif /* _ARM_NNFUNCTIONS_MODIFIED_H */

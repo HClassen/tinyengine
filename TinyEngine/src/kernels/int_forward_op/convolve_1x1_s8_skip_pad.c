@@ -20,7 +20,7 @@
 #include "tinyengine/base_ops.h"
 
 #include "arm_nnfunctions.h"
-#include "img2col_element.h"
+#include "../img2col_element.h"
 #include "kernel_element.h"
 
 #define DIM_KER_X (1U)
@@ -85,8 +85,8 @@ tinyengine_status convolve_1x1_s8_skip_pad(const q7_t *input, const uint16_t inp
 
 		int cnt = channel_div4; // two columns
 		while (cnt > 0) {
-			q7_q15_offset_reordered_ele(src, dst)
-            q7_q15_offset_reordered_ele(src, dst)
+			q7_q15_offset_reordered_ele(src, dst);
+            q7_q15_offset_reordered_ele(src, dst);
             cnt--;
 		}
 
@@ -110,7 +110,7 @@ tinyengine_status convolve_1x1_s8_skip_pad(const q7_t *input, const uint16_t inp
 
 		int cnt = channel_div4; // two * numof2col columns
 		while (cnt > 0) {
-			q7_q15_offset_reordered_ele(src, dst)
+			q7_q15_offset_reordered_ele(src, dst);
             cnt--;
 		}
 
