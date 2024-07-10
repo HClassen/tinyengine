@@ -176,6 +176,8 @@ tinyengine_status_fp pointwise_conv_fp_1row10col_10inputdepth_IOHW_int8weight(
 			}
 		}
 	}
+
+    return STATE_SUCCESS_fp;
 }
 
 tinyengine_status_fp pointwise_conv_fp_4row4col_IOHW_int8weight(

@@ -50,15 +50,8 @@ tinyengine_status convolve_1x1_s8_skip_pad(const q7_t *input, const uint16_t inp
 	int h = 0, w = 0;
 	for (int32_t i_element = 0; i_element < num_elements / 2; i_element++) {
 		/* Fill buffer for partial im2col - two columns at a time */
-		q7_t *src = &input[i_element * input_ch * 2];
+		q7_t *src = (q7_t *)&input[i_element * input_ch * 2];
 		q15_t *dst = two_column_buffer;
-
-		// use variables
-		q31_t in_q7x4;
-		q31_t in_q15x2_1;
-		q31_t in_q15x2_2;
-		q31_t out_q15x2_1;
-		q31_t out_q15x2_2;
 
 		int skip = 0;
 		// first element
@@ -99,15 +92,8 @@ tinyengine_status convolve_1x1_s8_skip_pad(const q7_t *input, const uint16_t inp
 	/* check if there is an odd column left-over for computation */
 	if (num_elements & 0x1) {
 		const q7_t *ker_a = kernel;
-		q7_t *src = &input[(num_elements - 1) * input_ch];
+		q7_t *src = (q7_t *)&input[(num_elements - 1) * input_ch];
 		q15_t *dst = two_column_buffer;
-
-		// use variables
-		q31_t in_q7x4;
-		q31_t in_q15x2_1;
-		q31_t in_q15x2_2;
-		q31_t out_q15x2_1;
-		q31_t out_q15x2_2;
 
 		int cnt = channel_div4; // two * numof2col columns
 		while (cnt > 0) {

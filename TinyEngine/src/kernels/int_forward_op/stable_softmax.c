@@ -40,4 +40,6 @@ tinyengine_status stable_softmax_inplace(float *input, const uint16_t length) {
 	for (uint16_t i = 0; i < length; i++) {
 		input[i] = input[i] / exp_sum;
 	}
+
+    return STATE_SUCCESS;
 }

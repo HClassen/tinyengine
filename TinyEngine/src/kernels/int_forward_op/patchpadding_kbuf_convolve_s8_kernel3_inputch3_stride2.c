@@ -38,9 +38,6 @@ tinyengine_status patchpadding_kbuf_convolve_s8_kernel3_inputch3_stride2(const q
 	q15_t *two_column_buf = runtime_buf;
 	q7_t *out = output;
 
-	q15_t pad16 = pad_value;
-	const int16_t inoff16 = input_offset;
-
 	for (int16_t i_out_y = 0; i_out_y < output_y; i_out_y++) {
 		for (int16_t i_out_x = 0; i_out_x < output_x; i_out_x++) {
 			/* This part implements the im2col function */
@@ -48,18 +45,11 @@ tinyengine_status patchpadding_kbuf_convolve_s8_kernel3_inputch3_stride2(const q
 			int16_t base_idx_y = (i_out_y * 2);
 			int16_t base_idx_x = (i_out_x * 2);
 
-			// use variables
-			q31_t in_q7x4;
-			q31_t in_q15x2_1;
-			q31_t in_q15x2_2;
-			q31_t out_q15x2_1;
-			q31_t out_q15x2_2;
-
 			/* load address:8bit */
 			q7_t *src;
 
 			/* buffer for im2col:16bit */
-			q15_t *dst = col_buffer;
+			q15_t *dst = (q15_t *)col_buffer;
 
 			int skip_top = pad_t - base_idx_y;
 			int skip_bottom = MAX(0, (base_idx_y + 3) - (input_y - pad_b)); // 3x3
@@ -86,7 +76,7 @@ tinyengine_status patchpadding_kbuf_convolve_s8_kernel3_inputch3_stride2(const q
 			// address of the first valid values
             int m;
 			for (m = 0; m < y_cnt - skip_bottom; m++) {
-				src = input + ((base_idx_y + m) * input_x + base_idx_x + skip_left) * input_ch;
+				src = (q7_t *)&input[((base_idx_y + m) * input_x + base_idx_x + skip_left) * input_ch];
 				int x_cnt = 3; // 3 columns to load
 				// fill zero for left regions
 				int cnt = skip_left;
@@ -134,7 +124,7 @@ tinyengine_status patchpadding_kbuf_convolve_s8_kernel3_inputch3_stride2(const q
 			if (two_column_buf == runtime_buf + 2 * 27) {
 				out = mat_mult_s16(kernel, runtime_buf, output_ch, output_shift, output_mult, output_offset,
 								   output_activation_min, output_activation_max, input_ch * kernel_y * kernel_x, bias,
-								   out, kbuf);
+								   out, (q15_t *)kbuf);
 
 				/* counter reset */
 				two_column_buf = runtime_buf;

@@ -30,18 +30,18 @@
 		/*in_q7x4 = b2_nn_read_q7x4_ia((const q7_t **)&src);                              \
 		in_q15x2_1 = __SXTB16(__ROR(in_q7x4, 8));                                         \
 		in_q15x2_2 = __SXTB16(in_q7x4);		*/                                              \
-		in_q15x2_1 = ((src[0] & 0x0C) >> 2) + ((src[0] & 0xC0) << 10);                      \
-		in_q15x2_2 = (src[0] & 0x03) + ((src[0] & 0x30) << 12);                             \
+		q31_t __in_q15x2_1 = ((src[0] & 0x0C) >> 2) + ((src[0] & 0xC0) << 10);                      \
+		q31_t __in_q15x2_2 = (src[0] & 0x03) + ((src[0] & 0x30) << 12);                             \
 		src += 1;                                                                           \
-		out_q15x2_2 = __PKHTB(in_q15x2_1, in_q15x2_2, 16);                                  \
+		q31_t __out_q15x2_2 = __PKHTB(__in_q15x2_1, __in_q15x2_2, 16);                                  \
 		/* Maximum of 9 bits from the addition is expected */                               \
-		out_q15x2_2 = __SADD16(out_q15x2_2, offset_q15x2);                                  \
+		__out_q15x2_2 = __SADD16(__out_q15x2_2, offset_q15x2);                                  \
                                                                                             \
-		out_q15x2_1 = __PKHBT(in_q15x2_2, in_q15x2_1, 16);                                  \
-		out_q15x2_1 = __SADD16(out_q15x2_1, offset_q15x2);                                  \
+		q31_t __out_q15x2_1 = __PKHBT(__in_q15x2_2, __in_q15x2_1, 16);                                  \
+		__out_q15x2_1 = __SADD16(__out_q15x2_1, __offset_q15x2);                                  \
                                                                                             \
-		write_q15x2_ia(&dst, out_q15x2_1);                                                  \
-		write_q15x2_ia(&dst, out_q15x2_2);                                                  \
+		write_q15x2_ia(&dst, __out_q15x2_1);                                                  \
+		write_q15x2_ia(&dst, __out_q15x2_2);                                                  \
 	} while (0)
 
 #define b4_q7_q15_offset_ele(src, dst)                                                      \
@@ -50,104 +50,104 @@
 		/*in_q7x4 = b4_nn_read_q7x4_ia((const q7_t **)&src);                              \
 		in_q15x2_1 = __SXTB16(__ROR(in_q7x4, 8));                                         \
 		in_q15x2_2 = __SXTB16(in_q7x4);		*/                                              \
-		in_q15x2_1 = ((src[0] & 0xF0) >> 4) + ((src[1] & 0xF0) << 12);                      \
-		in_q15x2_2 = (src[0] & 0x0F) + ((src[1] & 0x0F) << 16);                             \
+		q31_t __in_q15x2_1 = ((src[0] & 0xF0) >> 4) + ((src[1] & 0xF0) << 12);                      \
+		q31_t __in_q15x2_2 = (src[0] & 0x0F) + ((src[1] & 0x0F) << 16);                             \
 		src += 2;                                                                           \
-		out_q15x2_2 = __PKHTB(in_q15x2_1, in_q15x2_2, 16);                                  \
+		q31_t __out_q15x2_2 = __PKHTB(__in_q15x2_1, __in_q15x2_2, 16);                                  \
 		/* Maximum of 9 bits from the addition is expected */                               \
-		out_q15x2_2 = __SADD16(out_q15x2_2, offset_q15x2);                                  \
+		__out_q15x2_2 = __SADD16(__out_q15x2_2, offset_q15x2);                                  \
                                                                                             \
-		out_q15x2_1 = __PKHBT(in_q15x2_2, in_q15x2_1, 16);                                  \
-		out_q15x2_1 = __SADD16(out_q15x2_1, offset_q15x2);                                  \
+		q31_t __out_q15x2_1 = __PKHBT(__in_q15x2_2, __in_q15x2_1, 16);                                  \
+		__out_q15x2_1 = __SADD16(__out_q15x2_1, offset_q15x2);                                  \
                                                                                             \
-		write_q15x2_ia(&dst, out_q15x2_1);                                                  \
-		write_q15x2_ia(&dst, out_q15x2_2);                                                  \
+		write_q15x2_ia((q15_t **)&dst, __out_q15x2_1);                                                  \
+		write_q15x2_ia((q15_t **)&dst, __out_q15x2_2);                                                  \
 	} while (0)
 
 #define q7_q15_offset_ele(src, dst)                                                       \
 	do {                                                                                  \
 		/* convert from q7 to q15 and then store the results in the destination buffer */ \
-		in_q7x4 = arm_nn_read_q7x4_ia((const q7_t **)&src);                               \
+		q31_t __in_q7x4 = arm_nn_read_q7x4_ia((const q7_t **)&src);                               \
 		/* Extract and sign extend each of the four q7 values to q15 */                   \
-		in_q15x2_1 = __SXTB16(__ROR(in_q7x4, 8));                                         \
-		in_q15x2_2 = __SXTB16(in_q7x4);                                                   \
+		q31_t __in_q15x2_1 = __SXTB16(__ROR(__in_q7x4, 8));                                         \
+		q31_t __in_q15x2_2 = __SXTB16(__in_q7x4);                                                   \
                                                                                           \
-		out_q15x2_2 = __PKHTB(in_q15x2_1, in_q15x2_2, 16);                                \
+		q31_t __out_q15x2_2 = __PKHTB(__in_q15x2_1, __in_q15x2_2, 16);                                \
 		/* Maximum of 9 bits from the addition is expected */                             \
-		out_q15x2_2 = __SADD16(out_q15x2_2, offset_q15x2);                                \
+		__out_q15x2_2 = __SADD16(__out_q15x2_2, offset_q15x2);                                \
                                                                                           \
-		out_q15x2_1 = __PKHBT(in_q15x2_2, in_q15x2_1, 16);                                \
-		out_q15x2_1 = __SADD16(out_q15x2_1, offset_q15x2);                                \
+		q31_t __out_q15x2_1 = __PKHBT(__in_q15x2_2, __in_q15x2_1, 16);                                \
+		__out_q15x2_1 = __SADD16(__out_q15x2_1, offset_q15x2);                                \
                                                                                           \
-		write_q15x2_ia(&dst, out_q15x2_1);                                                \
-		write_q15x2_ia(&dst, out_q15x2_2);                                                \
+		write_q15x2_ia((q15_t **)&dst, __out_q15x2_1);                                                \
+		write_q15x2_ia((q15_t **)&dst, __out_q15x2_2);                                                \
 	} while (0)
 
 #define q8_q15_offset_ele(src, dst)                                                       \
 	do {                                                                                  \
 		/* convert from q8 to q15 and then store the results in the destination buffer */ \
-		in_q7x4 = arm_nn_read_q7x4_ia((const q8_t **)&src);                               \
+		q31_t __in_q7x4 = arm_nn_read_q7x4_ia((const q7_t **)&src);                               \
 		/* Extend each of the four q8 values to q15 */                                    \
-		in_q15x2_1 = __UXTB16(__ROR(in_q7x4, 8));                                         \
-		in_q15x2_2 = __UXTB16(in_q7x4);                                                   \
+		q31_t __in_q15x2_1 = __UXTB16(__ROR(__in_q7x4, 8));                                         \
+		q31_t __in_q15x2_2 = __UXTB16(__in_q7x4);                                                   \
                                                                                           \
-		out_q15x2_2 = __PKHTB(in_q15x2_1, in_q15x2_2, 16);                                \
+		q31_t __out_q15x2_2 = __PKHTB(__in_q15x2_1, __in_q15x2_2, 16);                                \
 		/* Maximum of 9 bits from the addition is expected */                             \
-		out_q15x2_2 = __SADD16(out_q15x2_2, offset_q15x2);                                \
+		__out_q15x2_2 = __SADD16(__out_q15x2_2, offset_q15x2);                                \
                                                                                           \
-		out_q15x2_1 = __PKHBT(in_q15x2_2, in_q15x2_1, 16);                                \
-		out_q15x2_1 = __SADD16(out_q15x2_1, offset_q15x2);                                \
+		q31_t __out_q15x2_1 = __PKHBT(__in_q15x2_2, __in_q15x2_1, 16);                                \
+		__out_q15x2_1 = __SADD16(__out_q15x2_1, offset_q15x2);                                \
                                                                                           \
-		write_q15x2_ia(&dst, out_q15x2_1);                                                \
-		write_q15x2_ia(&dst, out_q15x2_2);                                                \
+		write_q15x2_ia((q15_t **)&dst, __out_q15x2_1);                                                \
+		write_q15x2_ia((q15_t **)&dst, __out_q15x2_2);                                                \
 	} while (0)
 
 #define b4_q15_offset_reordered_ele(src, dst)                                             \
 	do {                                                                                  \
 		/* convert from q7 to q15 and then store the results in the destination buffer */ \
-		in_q7x4 = b4_nn_read_q7x4_ia((const q7_t **)&src);                                \
+		q31_t __in_q7x4 = b4_nn_read_q7x4_ia((const q7_t **)&src);                                \
                                                                                           \
 		/* Extract and sign extend each of the four q7 values to q15 */                   \
-		out_q15x2_1 = __SXTB16(__ROR(in_q7x4, 8));                                        \
-		out_q15x2_2 = __SXTB16(in_q7x4);                                                  \
+		q31_t __out_q15x2_1 = __SXTB16(__ROR(__in_q7x4, 8));                                        \
+		q31_t __out_q15x2_2 = __SXTB16(__in_q7x4);                                                  \
                                                                                           \
-		out_q15x2_1 = __SADD16(out_q15x2_1, offset_q15x2);                                \
-		out_q15x2_2 = __SADD16(out_q15x2_2, offset_q15x2);                                \
+		__out_q15x2_1 = __SADD16(__out_q15x2_1, offset_q15x2);                                \
+		__out_q15x2_2 = __SADD16(__out_q15x2_2, offset_q15x2);                                \
                                                                                           \
-		write_q15x2_ia(&dst, out_q15x2_2);                                                \
-		write_q15x2_ia(&dst, out_q15x2_1);                                                \
+		write_q15x2_ia((q15_t **)&dst, __out_q15x2_2);                                                \
+		write_q15x2_ia((q15_t **)&dst, __out_q15x2_1);                                                \
 	} while (0)
 
 #define b2_q15_offset_reordered_ele(src, dst)                                             \
 	do {                                                                                  \
 		/* convert from q7 to q15 and then store the results in the destination buffer */ \
-		in_q7x4 = b2_nn_read_q7x4_ia(&src);                                               \
+		q31_t __in_q7x4 = b2_nn_read_q7x4_ia(&src);                                               \
                                                                                           \
 		/* Extract and sign extend each of the four q7 values to q15 */                   \
-		out_q15x2_1 = __SXTB16(__ROR(in_q7x4, 8));                                        \
-		out_q15x2_2 = __SXTB16(in_q7x4);                                                  \
+		q31_t __out_q15x2_1 = __SXTB16(__ROR(__in_q7x4, 8));                                        \
+		q31_t __out_q15x2_2 = __SXTB16(__in_q7x4);                                                  \
                                                                                           \
-		out_q15x2_1 = __SADD16(out_q15x2_1, offset_q15x2);                                \
-		out_q15x2_2 = __SADD16(out_q15x2_2, offset_q15x2);                                \
+		__out_q15x2_1 = __SADD16(__out_q15x2_1, offset_q15x2);                                \
+		__out_q15x2_2 = __SADD16(__out_q15x2_2, offset_q15x2);                                \
                                                                                           \
-		write_q15x2_ia(&dst, out_q15x2_2);                                                \
-		write_q15x2_ia(&dst, out_q15x2_1);                                                \
+		write_q15x2_ia((q15_t **)&dst, __out_q15x2_2);                                                \
+		write_q15x2_ia((q15_t **)&dst, __out_q15x2_1);                                                \
 	} while (0)
 
 #define q7_q15_offset_reordered_ele(src, dst)                                             \
 	do {                                                                                  \
 		/* convert from q7 to q15 and then store the results in the destination buffer */ \
-		in_q7x4 = arm_nn_read_q7x4_ia((const q7_t **)&src);                               \
+		q31_t __in_q7x4 = arm_nn_read_q7x4_ia((const q7_t **)&src);                               \
                                                                                           \
 		/* Extract and sign extend each of the four q7 values to q15 */                   \
-		out_q15x2_1 = __SXTB16(__ROR(in_q7x4, 8));                                        \
-		out_q15x2_2 = __SXTB16(in_q7x4);                                                  \
+		q31_t __out_q15x2_1 = __SXTB16(__ROR(__in_q7x4, 8));                                        \
+		q31_t __out_q15x2_2 = __SXTB16(__in_q7x4);                                                  \
                                                                                           \
-		out_q15x2_1 = __SADD16(out_q15x2_1, offset_q15x2);                                \
-		out_q15x2_2 = __SADD16(out_q15x2_2, offset_q15x2);                                \
+		__out_q15x2_1 = __SADD16(__out_q15x2_1, offset_q15x2);                                \
+		__out_q15x2_2 = __SADD16(__out_q15x2_2, offset_q15x2);                                \
                                                                                           \
-		write_q15x2_ia(&dst, out_q15x2_2);                                                \
-		write_q15x2_ia(&dst, out_q15x2_1);                                                \
+		write_q15x2_ia((q15_t **)&dst, __out_q15x2_2);                                                \
+		write_q15x2_ia((q15_t **)&dst, __out_q15x2_1);                                                \
 	} while (0)
 
 #define q31_assign2(src, dst) \

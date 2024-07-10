@@ -69,6 +69,8 @@ int postprocess_single(float *data, int w, int h, float stride, int num_classes,
 			}
 		}
 	}
+
+    return 0;
 }
 
 void data_requantize(int8_t *input_data, float *output_data, int size, int8_t y_zero, float y_scale) {
@@ -174,4 +176,6 @@ det_box **postprocessing(signed char *input_data[3], signed char y_zero[3], floa
 	for (int i = 0; i < num_classes; i++) {
 		box_ret[i] = nms_impl(candidates[i], ret_box[i], NMS_threshold, boxcnt[i]);
 	}
+
+    return NULL;
 }

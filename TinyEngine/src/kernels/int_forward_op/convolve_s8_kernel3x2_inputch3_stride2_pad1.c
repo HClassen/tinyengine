@@ -58,8 +58,8 @@ tinyengine_status convolve_s8_kernel3x2_inputch3_stride2_pad1(const q7_t *input,
 		const q7_t *ip_a1 = ip_a0 + 18;
 
 		// 27 for each output_ch
-		q31_t *dst1_31 = dst1;
-		q31_t *dst2_31 = dst2;
+		q31_t *dst1_31 = (q31_t *)dst1;
+		q31_t *dst2_31 = (q31_t *)dst2;
 		ip_a0 = read_and_pad(ip_a0, &dst1_31[0], &dst1_31[1]);
 		ip_a1 = read_and_pad(ip_a1, &dst2_31[0], &dst2_31[1]);
 		dst1_31 += 2;
@@ -81,8 +81,8 @@ tinyengine_status convolve_s8_kernel3x2_inputch3_stride2_pad1(const q7_t *input,
 		dst2_31 += 2;
 
 		// 17, 18
-		dst1 = dst1_31;
-		dst2 = dst2_31;
+		dst1 = (q15_t *)dst1_31;
+		dst2 = (q15_t *)dst2_31;
 		dst1[0] = *ip_a0++;
 		dst1[1] = *ip_a0++;
 		dst2[0] = *ip_a1++;
@@ -99,13 +99,6 @@ tinyengine_status convolve_s8_kernel3x2_inputch3_stride2_pad1(const q7_t *input,
 			const int16_t base_idx_x = (i_out_x * 2) - 1;
 			const q15_t *col_buffer = two_column_buf;
 
-			// use variables
-			q31_t in_q7x4;
-			q31_t in_q15x2_1;
-			q31_t in_q15x2_2;
-			q31_t out_q15x2_1;
-			q31_t out_q15x2_2;
-
 			/* load address:8bit */
 			q7_t *src;
 			q7_t *src2;
@@ -117,14 +110,14 @@ tinyengine_status convolve_s8_kernel3x2_inputch3_stride2_pad1(const q7_t *input,
 			q15_t *dst3;
 
 			int input_row_offset = 3 * input_x;
-			dst = col_buffer;
+			dst = (q15_t *)col_buffer;
 			dst2 = dst + 6;
 			dst3 = dst2 + 6;
 			if (base_idx_y != -1) {
 				if (base_idx_x != -1) {
 					// load all for now and unroll all
 					// 3x3 = 9 elements
-					src = input + (base_idx_y * input_x + base_idx_x) * input_ch;
+					src = (q7_t *)&input[(base_idx_y * input_x + base_idx_x) * input_ch];
 					src2 = src + input_row_offset;
 					src3 = src2 + input_row_offset;
 
@@ -141,7 +134,7 @@ tinyengine_status convolve_s8_kernel3x2_inputch3_stride2_pad1(const q7_t *input,
                     *dst3++ = *src3++ + input_offset;
 					*dst3++ = *src3++ + input_offset;
 				} else {
-					src = input + (base_idx_y * input_x) * input_ch;
+					src = (q7_t *)&input[(base_idx_y * input_x) * input_ch];
 					src2 = src + input_row_offset;
 					src3 = src2 + input_row_offset;
 
@@ -171,13 +164,13 @@ tinyengine_status convolve_s8_kernel3x2_inputch3_stride2_pad1(const q7_t *input,
 			} else {
 				// Padding the first row
 				// 3x2 = 6 elements
-				q31_t *dst_31 = dst;
+				q31_t *dst_31 = (q31_t *)dst;
 				*dst_31++ = pad_out_q15x2;
 				*dst_31++ = pad_out_q15x2;
 				*dst_31++ = pad_out_q15x2;
 				if (base_idx_x != -1) {
 					// 3x3 = 9 elements
-					src2 = input + (base_idx_x)*input_ch;
+					src2 = (q7_t *)&input[(base_idx_x)*input_ch];
 					src3 = src2 + input_row_offset;
 
 					// 3 * 2 = 6 = 4 * 1 + 2
@@ -189,7 +182,7 @@ tinyengine_status convolve_s8_kernel3x2_inputch3_stride2_pad1(const q7_t *input,
                     *dst3++ = *src3++ + input_offset;
 					*dst3++ = *src3++ + input_offset;
 				} else {
-					src2 = input;
+					src2 = (q7_t *)input;
 					src3 = src2 + input_row_offset;
 
 					// pad the first one: 1x3 = 3

@@ -35,6 +35,8 @@ tinyengine_status add_fpreq(int size, const int8_t* input1_data, const float inp
 		clamped_output = TN_MIN(clamped_output, 127);
 		output_data[i] = (int8_t)(clamped_output);
 	}
+
+	return STATE_SUCCESS;
 }
 
 const int activation_min = -128;
@@ -63,6 +65,8 @@ tinyengine_status add_fpreq_mask(int size, const int8_t* input1_data, const floa
 		output_data[i] = (int8_t)(clamped_output);
 		output_mask[i] = mask_value;
 	}
+
+	return STATE_SUCCESS;
 }
 
 tinyengine_status add_fpreq_bitmask(int size, const int8_t* input1_data, const float input1_scale,
@@ -99,4 +103,6 @@ tinyengine_status add_fpreq_bitmask(int size, const int8_t* input1_data, const f
 			output_mask++;
 		}
 	}
+
+	return STATE_SUCCESS;
 }

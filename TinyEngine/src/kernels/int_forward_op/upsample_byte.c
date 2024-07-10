@@ -23,7 +23,7 @@
 tinyengine_status upsample_byte(const q7_t *input, const uint16_t input_x, const uint16_t input_y,
 								const uint16_t input_ch, q7_t *output, const uint16_t sample_factor) {
 	// get output resolution
-	const uint16_t output_x = input_x * sample_factor, output_y = input_y * sample_factor, output_ch = input_ch;
+	const uint16_t output_x = input_x * sample_factor, output_ch = input_ch;
 
 	// upsample in a repeated manner
 	for (int ih = 0; ih < input_y; ih++) {
@@ -50,7 +50,7 @@ tinyengine_status upsample_byte(const q7_t *input, const uint16_t input_x, const
 tinyengine_status upsample_byte_bilinear(const q7_t *input, const uint16_t input_x, const uint16_t input_y,
 										 const uint16_t input_ch, q7_t *output, const uint16_t sample_factor) {
 	// get output resolution
-	const uint16_t output_x = input_x * sample_factor, output_y = input_y * sample_factor, output_ch = input_ch;
+	// const uint16_t output_x = input_x * sample_factor, output_y = input_y * sample_factor, output_ch = input_ch;
 
 	//	//upsample in a repeated manner
 	//	for(int oh = 0; oh < input_y; oh++){

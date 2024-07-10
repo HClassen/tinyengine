@@ -86,4 +86,6 @@ tinyengine_status add(int size, struct add_params* params, const int8_t* input1_
 
 		output_data[i] = (int8_t)(clamped_output);
 	}
+
+    return STATE_SUCCESS;
 }

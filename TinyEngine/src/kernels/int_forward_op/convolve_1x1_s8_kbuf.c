@@ -53,18 +53,10 @@ tinyengine_status convolve_1x1_s8_kbuf(const q7_t *input, const uint16_t input_x
 
 	/* whether kernels can fit in the buffer */
 	// fill in kernels
-	const q7_t *ip_a0 = kernel;
 	/* output stationary */
 	for (int32_t i_element = 0; i_element < num_elements; i_element += 2) {
-		q7_t *src = &input[i_element * input_ch];
+		q7_t *src = (q7_t *)&input[i_element * input_ch];
 		q15_t *dst = two_column_buffer;
-
-		// use variables
-		q31_t in_q7x4;
-		q31_t in_q15x2_1;
-		q31_t in_q15x2_2;
-		q31_t out_q15x2_1;
-		q31_t out_q15x2_2;
 
 		int cnt = channel_div4; // two columns
 		while (cnt > 0) {
@@ -74,21 +66,14 @@ tinyengine_status convolve_1x1_s8_kbuf(const q7_t *input, const uint16_t input_x
 		}
 
 		out = mat_mult_s16(kernel, two_column_buffer, output_ch, output_shift, output_mult, (q7_t)out_offset,
-						   out_activation_min, out_activation_max, input_ch, bias, out, kbuf);
+						   out_activation_min, out_activation_max, input_ch, bias, out, (q15_t *)kbuf);
 	}
 
 	/* check if there is an odd column left-over for computation */
 	if (num_elements & 0x1) {
 		const q7_t *ker_a = kernel;
-		q7_t *src = &input[(num_elements - 1) * input_ch];
+		q7_t *src = (q7_t *)&input[(num_elements - 1) * input_ch];
 		q15_t *dst = two_column_buffer;
-
-		// use variables
-		q31_t in_q7x4;
-		q31_t in_q15x2_1;
-		q31_t in_q15x2_2;
-		q31_t out_q15x2_1;
-		q31_t out_q15x2_2;
 
 		int cnt = channel_div4; // two * numof2col columns
 		while (cnt > 0) {

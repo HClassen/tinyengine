@@ -50,15 +50,8 @@ tinyengine_status convolve_1x1_s8_fpreq_bitmask_partialCH(const q7_t *input, con
 
 	for (int32_t i_element = 0; i_element < num_elements / 2; i_element++) {
 		/* Fill buffer for partial im2col - two columns at a time */
-		q7_t *src = &input[i_element * input_ch * 2];
+		q7_t *src = (q7_t *)&input[i_element * input_ch * 2];
 		q15_t *dst = two_column_buffer;
-
-		//use variables
-		q31_t in_q7x4;
-		q31_t in_q15x2_1;
-		q31_t in_q15x2_2;
-		q31_t out_q15x2_1;
-		q31_t out_q15x2_2;
 
 		if (first_k_channel % 4 == 0) {
 			int cnt = channel_div4; //two columns
@@ -97,15 +90,8 @@ tinyengine_status convolve_1x1_s8_fpreq_bitmask_partialCH(const q7_t *input, con
 	if (num_elements & 0x1) {
 		const q7_t *ker_sram = kernel_sram;
 		const q7_t *ker_flash = kernel_flash;
-		q7_t *src = &input[(num_elements - 1) * input_ch];
+		q7_t *src = (q7_t *)&input[(num_elements - 1) * input_ch];
 		q15_t *dst = two_column_buffer;
-
-		//use variables
-		q31_t in_q7x4;
-		q31_t in_q15x2_1;
-		q31_t in_q15x2_2;
-		q31_t out_q15x2_1;
-		q31_t out_q15x2_2;
 
 		const uint16_t num_col_sram = first_k_channel;
 		const uint16_t num_col_flash = input_ch - first_k_channel;
@@ -273,15 +259,8 @@ tinyengine_status convolve_1x1_s8_fpreq_mask_partialCH(
 
 	for (i_element = 0; i_element < num_elements / 2; i_element++) {
 		/* Fill buffer for partial im2col - two columns at a time */
-		q7_t *src = &input[i_element * input_ch * 2];
+		q7_t *src = (q7_t *)&input[i_element * input_ch * 2];
 		q15_t *dst = two_column_buffer;
-
-		//use variables
-		q31_t in_q7x4;
-		q31_t in_q15x2_1;
-		q31_t in_q15x2_2;
-		q31_t out_q15x2_1;
-		q31_t out_q15x2_2;
 
 		if (first_k_channel % 4 == 0) {
 			int cnt = channel_div4; //two columns
@@ -320,15 +299,8 @@ tinyengine_status convolve_1x1_s8_fpreq_mask_partialCH(
 		int32_t i_ch_out;
 		const q7_t *ker_sram = kernel_sram;
 		const q7_t *ker_flash = kernel_flash;
-		q7_t *src = &input[(num_elements - 1) * input_ch];
+		q7_t *src = (q7_t *)&input[(num_elements - 1) * input_ch];
 		q15_t *dst = two_column_buffer;
-
-		//use variables
-		q31_t in_q7x4;
-		q31_t in_q15x2_1;
-		q31_t in_q15x2_2;
-		q31_t out_q15x2_1;
-		q31_t out_q15x2_2;
 
 		const uint16_t num_col_sram = first_k_channel;
 		const uint16_t num_col_flash = input_ch - first_k_channel;

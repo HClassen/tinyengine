@@ -56,7 +56,7 @@ tinyengine_status convolve_1x1_s8_SRAM(const q7_t *input, const uint16_t input_x
 	// fill in kernels
 	const q7_t *ip_a0 = kernel;
 	for (int i = 0; i < output_ch; i += 2) {
-		q31_t *dst1 = &kbuf[i * input_ch / 2]; // each q31_t store 2 elements
+		q31_t *dst1 = (q31_t *)&kbuf[i * input_ch / 2]; // each q31_t store 2 elements
 		q31_t *dst2 = dst1 + input_ch / 2;
 
 		/* align the second pointer for A */
@@ -65,8 +65,6 @@ tinyengine_status convolve_1x1_s8_SRAM(const q7_t *input, const uint16_t input_x
 		uint16_t col_count = input_ch / 4;
 		/* accumulate over the vector */
 		while (col_count) {
-			q31_t a01, a02, a11, a12;
-
 			ip_a0 = read_and_pad_reordered(ip_a0, &dst1[0], &dst1[1]);
 			ip_a1 = read_and_pad_reordered(ip_a1, &dst2[0], &dst2[1]);
 
@@ -81,15 +79,8 @@ tinyengine_status convolve_1x1_s8_SRAM(const q7_t *input, const uint16_t input_x
 
 	/* output stationary */
 	for (int32_t i_element = 0; i_element < num_elements; i_element += 2) {
-		q7_t *src = &input[i_element * input_ch];
+		q7_t *src = (q7_t *)&input[i_element * input_ch];
 		q15_t *dst = two_column_buffer;
-
-		// use variables
-		q31_t in_q7x4;
-		q31_t in_q15x2_1;
-		q31_t in_q15x2_2;
-		q31_t out_q15x2_1;
-		q31_t out_q15x2_2;
 
 		int cnt = channel_div4; // two columns
 		while (cnt > 0) {
@@ -105,15 +96,8 @@ tinyengine_status convolve_1x1_s8_SRAM(const q7_t *input, const uint16_t input_x
 	/* check if there is an odd column left-over for computation */
 	if (num_elements & 0x1) {
 		const q7_t *ker_a = kernel;
-		q7_t *src = &input[(num_elements - 1) * input_ch];
+		q7_t *src = (q7_t *)&input[(num_elements - 1) * input_ch];
 		q15_t *dst = two_column_buffer;
-
-		// use variables
-		q31_t in_q7x4;
-		q31_t in_q15x2_1;
-		q31_t in_q15x2_2;
-		q31_t out_q15x2_1;
-		q31_t out_q15x2_2;
 
 		int cnt = channel_div4; // two * numof2col columns
 		while (cnt > 0) {

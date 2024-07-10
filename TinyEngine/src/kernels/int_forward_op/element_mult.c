@@ -28,7 +28,7 @@ tinyengine_status element_mult_nx1(const q7_t* input, const uint16_t input_h, co
 								   const int32_t out_activation_min, const int32_t out_activation_max,
 								   const float output_scale, q7_t* output) {
 	for (int element = 0; element < input_h * input_w; element++) {
-		q7_t* multiplier = input2;
+		q7_t* multiplier = (q7_t *)input2;
 		for (int c = 0; c < input_c; c++) {
 			const int32_t input1_val = input1_offset + *input++;
 			const int32_t input2_val = input2_offset + *multiplier++;
@@ -40,4 +40,6 @@ tinyengine_status element_mult_nx1(const q7_t* input, const uint16_t input_h, co
 			*output++ = clamped_result;
 		}
 	}
+
+    return STATE_SUCCESS;
 }

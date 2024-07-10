@@ -23,6 +23,7 @@
 #include "arm_math.h"
 #include "arm_nnfunctions.h"
 #include "arm_nnsupportfunctions.h"
+#include "arm_nnfunctions_modified.h"
 
 #define HOLD_KERNEL
 
@@ -38,12 +39,6 @@ tinyengine_status patchpadding_convolve_s8_kernel3_inputch3_stride2(const q7_t *
 	q15_t *two_column_buf = runtime_buf;
 	q7_t *out = output;
 
-	q15_t pad16 = pad_value;
-	const int16_t inoff16 = input_offset;
-	q15_t pad_out = pad16 + inoff16;
-	q31_t pad_out_q15x2 = __PKHBT(pad_out, pad_out, 16);
-	q31_t offset_q15x2 = __PKHBT(inoff16, inoff16, 16);
-
 	const q7_t *ip_a0 = kernel;
 
 #ifdef HOLD_KERNEL
@@ -54,8 +49,8 @@ tinyengine_status patchpadding_convolve_s8_kernel3_inputch3_stride2(const q7_t *
 		const q7_t *ip_a1 = ip_a0 + 27;
 
 		// 27 for each output_ch
-		q31_t *dst1_31 = dst1;
-		q31_t *dst2_31 = dst2;
+		q31_t *dst1_31 = (q31_t *)dst1;
+		q31_t *dst2_31 = (q31_t *)dst2;
 		ip_a0 = read_and_pad(ip_a0, &dst1_31[0], &dst1_31[1]);
 		ip_a1 = read_and_pad(ip_a1, &dst2_31[0], &dst2_31[1]);
 		dst1_31 += 2;
@@ -86,8 +81,8 @@ tinyengine_status patchpadding_convolve_s8_kernel3_inputch3_stride2(const q7_t *
 		dst1_31 += 2;
 		dst2_31 += 2;
 		// 25, 26, 27
-		dst1 = dst1_31;
-		dst2 = dst2_31;
+		dst1 = (q15_t *)dst1_31;
+		dst2 = (q15_t *)dst2_31;
 		dst1[0] = *ip_a0++;
 		dst1[1] = *ip_a0++;
 		dst1[2] = *ip_a0++;
@@ -100,7 +95,6 @@ tinyengine_status patchpadding_convolve_s8_kernel3_inputch3_stride2(const q7_t *
 	}
 #endif
 
-	int skip = 0;
 	for (int16_t i_out_y = 0; i_out_y < output_y; i_out_y++) {
 		for (int16_t i_out_x = 0; i_out_x < output_x; i_out_x++) {
 			/* This part implements the im2col function */
@@ -108,18 +102,11 @@ tinyengine_status patchpadding_convolve_s8_kernel3_inputch3_stride2(const q7_t *
 			int16_t base_idx_y = (i_out_y * 2);
 			int16_t base_idx_x = (i_out_x * 2);
 
-			// use variables
-			q31_t in_q7x4;
-			q31_t in_q15x2_1;
-			q31_t in_q15x2_2;
-			q31_t out_q15x2_1;
-			q31_t out_q15x2_2;
-
 			/* load address:8bit */
 			q7_t *src;
 
 			/* buffer for im2col:16bit */
-			q15_t *dst = col_buffer;
+			q15_t *dst = (q15_t *)col_buffer;
 
 			int skip_top = pad_t - base_idx_y;
 			int skip_bottom = MAX(0, (base_idx_y + 3) - (input_y - pad_b)); // 3x3
@@ -146,7 +133,7 @@ tinyengine_status patchpadding_convolve_s8_kernel3_inputch3_stride2(const q7_t *
 			// address of the first valid values
             int m;
 			for (m = 0; m < y_cnt - skip_bottom; m++) {
-				src = input + ((base_idx_y + m) * input_x + base_idx_x + skip_left) * input_ch;
+				src = (q7_t *)&input[((base_idx_y + m) * input_x + base_idx_x + skip_left) * input_ch];
 				int x_cnt = 3; // 3 columns to load
 				// fill zero for left regions
 				int cnt = skip_left;

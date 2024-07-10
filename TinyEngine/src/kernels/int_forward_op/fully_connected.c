@@ -27,8 +27,8 @@ tinyengine_status fully_connected_fp(const float *input, const uint16_t input_x,
 			int pixel_cnt = w + input_x * h;
 			for (int out_c = 0; out_c < output_ch; out_c++) {
 				float intermediate = bias[out_c];
-				float *start_weight = weights + out_c * input_ch;
-				float *start_input = input + input_ch * pixel_cnt;
+				float *start_weight = (float *)&weights[out_c * input_ch];
+				float *start_input = (float *)&input[input_ch * pixel_cnt];
 				float *start_out = output + output_ch * pixel_cnt;
 				for (int in_c = 0; in_c < input_ch; in_c++) {
 					intermediate += start_weight[in_c] * start_input[in_c];
@@ -37,4 +37,6 @@ tinyengine_status fully_connected_fp(const float *input, const uint16_t input_x,
 			}
 		}
 	}
+
+    return STATE_SUCCESS;
 }

@@ -30,4 +30,6 @@ tinyengine_status mat_mul_fp(const float* matA, const uint16_t matA_row, const u
 			output[m + n * matB_col] = sum;
 		}
 	}
+
+    return STATE_SUCCESS;
 }

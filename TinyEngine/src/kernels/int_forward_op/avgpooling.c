@@ -50,4 +50,6 @@ tinyengine_status avg_pooling(const q7_t* input, const uint16_t input_h, const u
 			}
 		}
 	}
+
+    return STATE_SUCCESS;
 }

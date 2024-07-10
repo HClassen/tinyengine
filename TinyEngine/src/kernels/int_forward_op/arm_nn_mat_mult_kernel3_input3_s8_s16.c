@@ -67,13 +67,11 @@ q7_t *arm_nn_mat_mult_kernel3_input3_s8_s16(const q7_t *input_a, const q15_t *in
 		/* setup pointers for B */
 		const q15_t *ip_b0 = input_b;
 		const q15_t *ip_b1 = ip_b0 + num_col_a;
-		const q31_t *ip31_b0 = ip_b0;
-		const q31_t *ip31_b1 = ip_b1;
 
 		/* align the second pointer for A */
 		const q15_t *ksrc2 = ksrc + 27;
-		q31_t *ksrc_31 = ksrc;
-		q31_t *ksrc2_31 = ksrc2;
+		q31_t *ksrc_31 = (q31_t *)ksrc;
+		q31_t *ksrc2_31 = (q31_t *)ksrc2;
 
 		/* Init accumulator with bias for channel N and N + 1 */
 		q31_t ch_0_out_0 = *bias;
@@ -82,7 +80,6 @@ q7_t *arm_nn_mat_mult_kernel3_input3_s8_s16(const q7_t *input_a, const q15_t *in
 		q31_t ch_1_out_1 = *bias++;
 
 		//------------------4
-		q31_t a01, a02, a11, a12;
 		q31_t b0 = arm_nn_read_q15x2_ia(&ip_b0);
 		q31_t b1 = arm_nn_read_q15x2_ia(&ip_b1);
 
