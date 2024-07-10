@@ -23,6 +23,7 @@
 #include "arm_nnfunctions.h"
 #include "../img2col_element.h"
 #include "kernel_element.h"
+#include "mat_mult_kernels.h"
 
 #define DIM_KER_X (1U)
 #define DIM_KER_Y (1U)
